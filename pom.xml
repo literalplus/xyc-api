@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>li.l1t.common</groupId>
+    <artifactId>xyc-api</artifactId>
+    <version>4.0-SNAPSHOT</version>
+    <name>XYC API</name>
+    <inceptionYear>2013</inceptionYear>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <minecraft.version>1.8</minecraft.version>
+        <spigot.version>${minecraft.version}.3-R0.1-SNAPSHOT</spigot.version>
+        <java.version>1.8</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <!-- maven-release-plugin -->
+        <ignoreSnapshots>true</ignoreSnapshots>
+        <!-- JavaDoc footer -->
+        <maven.build.timestamp.format>yyyy</maven.build.timestamp.format>
+    </properties>
+
+    <scm>
+        <connection>scm:git:git@github.com:xxyy/xyc-api.git</connection>
+        <developerConnection>scm:git:git@github.com:xxyy/xyc-api.git</developerConnection>
+        <url>https://github.com/xxyy/xyc-api/</url>
+    </scm>
+
+    <ciManagement>
+        <system>jenkins</system>
+        <url>https://ci.l1t.li/job/public~xyc-api/</url>
+    </ciManagement>
+
+    <distributionManagement>
+        <downloadUrl>https://ci.l1t.li/job/public~xyc-api/</downloadUrl>
+        <repository>
+            <id>xxyy-repo</id>
+            <url>https://repo.l1t.li/xxyy-public/</url>
+        </repository>
+    </distributionManagement>
+
+    <repositories>
+        <repository>
+            <id>oss-sonatype</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+            <!-- BungeeCord-Chat -->
+        </repository>
+        <repository>
+            <id>spigot-repo</id>
+            <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
+            <!-- Spigot-API -->
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.google.code.findbugs</groupId>
+            <artifactId>jsr305
+            </artifactId> <!-- javax nullity annotations (formerly from Guava) -->
+            <version>3.0.0</version> <!-- only CraftBukkit ships this -->
+        </dependency>
+        <dependency>
+            <groupId>org.spigotmc</groupId>
+            <artifactId>spigot-api</artifactId>
+            <version>${spigot.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.google.guava</groupId>
+                    <artifactId>guava</artifactId>
+                </exclusion>
+            </exclusions>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.md-5</groupId>
+            <artifactId>bungeecord-chat</artifactId>
+            <version>1.8-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>buildnumber-maven-plugin</artifactId>
+                <version>1.2</version>
+                <executions>
+                    <execution>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>create</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <shortRevisionLength>7</shortRevisionLength>
+                    <revisionOnScmFailure>unknown</revisionOnScmFailure>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.3.2</version>
+
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                        </manifest>
+                        <manifestEntries>
+                            <Implementation-Build>${buildNumber}</Implementation-Build>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.9.1</version>
+
+                <configuration>
+                    <excludePackageNames>*.internal.*</excludePackageNames>
+                    <bottom><![CDATA[Copyright ${project.inceptionYear} - ${maven.build.timestamp} <a href="https://l1t.li/">Literallie<a> (Philipp Nowak).
+                    Find the source code at <a href="https://github.com/xxyy/xyc-api/">GitHub</a>.]]></bottom>
+                    <defaultAuthor><![CDATA[<a href="https://l1t.li/">probably Literallie</a>]]></defaultAuthor>
+                    <doctitle>XYC-API ${project.version} JavaDocs</doctitle>
+                    <outputDirectory>${project.basedir}/target/apidocs</outputDirectory>
+                    <quiet>true</quiet>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
