@@ -28,7 +28,7 @@
 
     <groupId>li.l1t.common</groupId>
     <artifactId>xyc-api</artifactId>
-    <version>4.0.1-SNAPSHOT</version>
+    <version>4.0.1</version>
     <name>XYC API</name>
     <inceptionYear>2013</inceptionYear>
 
