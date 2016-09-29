@@ -57,4 +57,9 @@ public class InternalException extends NonSensitiveException {
     public boolean needsLogging() {
         return getCause() != null;
     }
+
+    @Override
+    public String getColoredMessage() {
+        return "§4§lInterner Fehler: §c" + getLocalizedMessage();
+    }
 }

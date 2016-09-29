@@ -45,4 +45,11 @@ public abstract class NonSensitiveException extends RuntimeException {
     }
 
     public abstract boolean needsLogging();
+
+    /**
+     * @return the message of this exception decorated with Minecraft formatting codes
+     */
+    public String getColoredMessage() {
+        return "§c§lFehler: §c" + getLocalizedMessage();
+    }
 }
