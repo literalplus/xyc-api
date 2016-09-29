@@ -22,27 +22,39 @@
  * SOFTWARE.
  */
 
-package li.l1t.common.api.exception;
+package li.l1t.common.exception;
+
+import java.sql.SQLException;
 
 /**
- * A kind of exception whose messages do not contain sensitive content and therefore can be
- * shown to players as-is.
+ * Represents an exception that will be shown to command senders as 'internal exception' with the
+ * provided reason string.
  *
  * @author <a href="http://xxyy.github.io/">xxyy</a>
- * @since 2016-09-29
+ * @since 2016-08-23
  */
-public abstract class NonSensitiveException extends RuntimeException {
-    public NonSensitiveException(String message) {
+public class InternalException extends NonSensitiveException {
+    public InternalException(String message) {
         super(message);
     }
 
-    public NonSensitiveException(String message, Throwable cause) {
+    public InternalException(String message, Throwable cause) {
         super(message, cause);
     }
 
-    public NonSensitiveException(Throwable cause) {
-        super(cause);
+    public static InternalException wrap(Exception cause) {
+        return wrap(cause, cause.getMessage());
     }
 
-    public abstract boolean needsLogging();
+    public static InternalException wrap(SQLException cause) {
+        return new InternalException("Datenbankfehler.", cause);
+    }
+
+    public static InternalException wrap(Exception cause, String message) {
+        return new InternalException(message, cause);
+    }
+
+    public boolean needsLogging() {
+        return getCause() != null;
+    }
 }

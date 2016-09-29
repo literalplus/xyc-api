@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package li.l1t.common.api.exception;
+package li.l1t.common.exception;
 
 /**
  * Represents an exception that will be shown to command senders as error they caused by providing
