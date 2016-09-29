@@ -42,14 +42,39 @@ public class InternalException extends NonSensitiveException {
         super(message, cause);
     }
 
+    /**
+     * Wraps an arbitrary exception in an InternalException, <b>retaining its message</b>. Note that
+     * for some exception types, sensitive information may be included in the message, so consider
+     * using {@link #wrap(Exception, String)} for these. <p>If there is a specific wrap method for
+     * the type of exception provided, this method forwards this call there.</p>
+     *
+     * @param cause the exception to wrap
+     * @return a new InternalException
+     */
     public static InternalException wrap(Exception cause) {
+        if (cause instanceof SQLException) {
+            return wrap((SQLException) cause);
+        }
         return wrap(cause, cause.getMessage());
     }
 
+    /**
+     * Wraps an SQL exception, hiding away its message behind a generic database error message.
+     *
+     * @param cause the SQL exception to wrap
+     * @return a new InternalException
+     */
     public static InternalException wrap(SQLException cause) {
         return new InternalException("Datenbankfehler.", cause);
     }
 
+    /**
+     * Wraps an exception in an InternalException, with provided message on the InternalException.
+     *
+     * @param cause   the exception to wrap as a cause
+     * @param message the message for the InternalException
+     * @return a new InternalException
+     */
     public static InternalException wrap(Exception cause, String message) {
         return new InternalException(message, cause);
     }

@@ -25,8 +25,8 @@
 package li.l1t.common.exception;
 
 /**
- * A kind of exception whose messages do not contain sensitive content and therefore can be
- * shown to players as-is.
+ * A kind of exception whose messages do not contain sensitive content and therefore can be shown to
+ * players as-is.
  *
  * @author <a href="http://xxyy.github.io/">xxyy</a>
  * @since 2016-09-29
@@ -44,6 +44,9 @@ public abstract class NonSensitiveException extends RuntimeException {
         super(cause);
     }
 
+    /**
+     * @return whether this exception should be logged to allow further investigation
+     */
     public abstract boolean needsLogging();
 
     /**

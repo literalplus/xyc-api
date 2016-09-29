@@ -51,22 +51,64 @@ public class UserException extends NonSensitiveException {
         super(message, cause);
     }
 
+    /**
+     * Wraps an arbitrary exception in a UserException, <b>retaining its message</b>. Note that for
+     * some exception types, sensitive information may be included in the message, so consider using
+     * {@link #wrap(Exception, String)} for these. <p>If there is a specific wrap method for the
+     * type of exception provided, this method forwards this call there.</p>
+     *
+     * @param cause the exception to wrap
+     * @return a new UserException
+     */
     public static UserException wrap(Exception cause) {
+        if (cause instanceof NumberFormatException) {
+            return wrapNotANumber((NumberFormatException) cause);
+        } else if (cause instanceof IllegalArgumentException) {
+            return wrap((IllegalArgumentException) cause);
+        } else if (cause instanceof IllegalStateException) {
+            return wrap((IllegalStateException) cause);
+        }
         return wrap(cause, cause.getMessage());
     }
 
+    /**
+     * Wraps an IllegalArgumentException in a UserException, retaining its message.
+     *
+     * @param cause the exception to wrap
+     * @return a new UserException with cause and message
+     */
     public static UserException wrap(IllegalArgumentException cause) {
         return wrap(cause, cause.getMessage());
     }
 
+    /**
+     * Wraps an IllegalStateException in a UserException, retaining its message.
+     *
+     * @param cause the exception to wrap
+     * @return a new UserException with cause and message
+     */
     public static UserException wrap(IllegalStateException cause) {
         return wrap(cause, cause.getMessage());
     }
 
+    /**
+     * Wraps an exception in a UserException, with provided message on the UserException.
+     *
+     * @param cause   the exception to wrap as a cause
+     * @param message the message for the UserException
+     * @return a new UserException
+     */
     public static UserException wrap(Exception cause, String message) {
         return new UserException(message, cause);
     }
 
+    /**
+     * Wraps a NumberFormatException, replacing the "For Input string: " prefix on its message with
+     * a nicer German message.
+     *
+     * @param nfe the exception to wrap
+     * @return a new UserException
+     */
     public static UserException wrapNotANumber(NumberFormatException nfe) {
         String strippedMessage = nfe.getMessage().replace("For Input string: ", ""); //For input string: "notanint"
         return new UserException("Das ist keine Zahl: %s", strippedMessage);
