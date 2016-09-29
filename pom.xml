@@ -72,11 +72,6 @@
             <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
             <!-- BungeeCord-Chat -->
         </repository>
-        <repository>
-            <id>spigot-repo</id>
-            <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
-            <!-- Spigot-API -->
-        </repository>
     </repositories>
 
     <dependencies>
@@ -85,18 +80,6 @@
             <artifactId>jsr305
             </artifactId> <!-- javax nullity annotations (formerly from Guava) -->
             <version>3.0.0</version> <!-- only CraftBukkit ships this -->
-        </dependency>
-        <dependency>
-            <groupId>org.spigotmc</groupId>
-            <artifactId>spigot-api</artifactId>
-            <version>${spigot.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.google.guava</groupId>
-                    <artifactId>guava</artifactId>
-                </exclusion>
-            </exclusions>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>net.md-5</groupId>

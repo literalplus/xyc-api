@@ -24,38 +24,67 @@
 
 package li.l1t.common.chat;
 
+import com.google.common.base.Joiner;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.HoverEvent.Action;
 import net.md_5.bungee.api.chat.TextComponent;
-import org.apache.commons.lang.StringUtils;
 
 /**
- * A drop-in replacement for {@link ComponentBuilder} which adds some additional convenience
- * methods in order to achieve simpler configuration.
+ * A drop-in replacement for {@link ComponentBuilder} which adds some additional convenience methods
+ * in order to achieve simpler configuration.
  *
  * @author <a href="http://xxyy.github.io/">xxyy</a>
  * @since 2015-08-31
  */
 public class XyComponentBuilder extends ComponentBuilder {
+    private static final Joiner NEWLINE_JOINER = Joiner.on('\n');
+
+    /**
+     * Constructs a new component builder with the same data as given builder.
+     *
+     * @param original the builder to copy from
+     */
+    public XyComponentBuilder(ComponentBuilder original) {
+        super(original);
+    }
+
+    /**
+     * Constructs a new component builder with the same data as given builder.
+     *
+     * @param original the builder to copy from
+     * @deprecated unnecessarily specific argument type - prefer {@link #XyComponentBuilder(ComponentBuilder)}.
+     */
+    @Deprecated
     public XyComponentBuilder(XyComponentBuilder original) {
         super(original);
     }
 
+    /**
+     * Constructs a new component builder with some text for the first component.
+     *
+     * @param text the text for the first component
+     */
     public XyComponentBuilder(String text) {
         super(text);
     }
 
+    /**
+     * Constructs a new component builder with text and color for the first component.
+     *
+     * @param text  the text for the first component
+     * @param color the color of the first component
+     */
     public XyComponentBuilder(String text, ChatColor color) {
         super(text);
         color(color);
     }
 
     /**
-     * Sets the {@link HoverEvent} with type of {@link Action#SHOW_TEXT}
-     * and the given message for the current part. Use {@code \n} for newlines.
+     * Sets the {@link HoverEvent} with type of {@link Action#SHOW_TEXT} and the given message for
+     * the current part. Use {@code \n} for newlines.
      *
      * @param legacyText the legacy text to add as tooltip
      * @return this builder for chaining
@@ -67,20 +96,19 @@ public class XyComponentBuilder extends ComponentBuilder {
     }
 
     /**
-     * Sets the {@link HoverEvent} with type of {@link Action#SHOW_TEXT}
-     * and the given lines for the current part. Formatting codes may be used.
+     * Sets the {@link HoverEvent} with type of {@link Action#SHOW_TEXT} and the given lines for the
+     * current part. Formatting codes may be used.
      *
      * @param legacyLines the legacy lines to show in the tooltip
      * @return this builder for chaining
      */
     public XyComponentBuilder tooltip(String... legacyLines) {
-        //noinspection ConstantConditions
-        return tooltip(StringUtils.join(legacyLines, "\n"));
+        return tooltip(NEWLINE_JOINER.join(legacyLines));
     }
 
     /**
-     * Sets the {@link ClickEvent} with type of {@link ClickEvent.Action#RUN_COMMAND}
-     * and the given command for the current part.
+     * Sets the {@link ClickEvent} with type of {@link ClickEvent.Action#RUN_COMMAND} and the given
+     * command for the current part.
      *
      * @param command the command to run on click
      * @return this builder for chaining
@@ -91,9 +119,9 @@ public class XyComponentBuilder extends ComponentBuilder {
     }
 
     /**
-     * Sets the {@link ClickEvent} with type of {@link ClickEvent.Action#RUN_COMMAND} and the given command for the
-     * current part and sets the {@link HoverEvent} with type of {@link Action#SHOW_TEXT} with an appropriate
-     * hint text.
+     * Sets the {@link ClickEvent} with type of {@link ClickEvent.Action#RUN_COMMAND} and the given
+     * command for the current part and sets the {@link HoverEvent} with type of {@link
+     * Action#SHOW_TEXT} with an appropriate hint text.
      *
      * @param command the command to run on click
      * @return this builder for chaining
@@ -109,8 +137,8 @@ public class XyComponentBuilder extends ComponentBuilder {
     }
 
     /**
-     * Sets the {@link ClickEvent} with type of {@link ClickEvent.Action#SUGGEST_COMMAND}
-     * and the given command for the current part.
+     * Sets the {@link ClickEvent} with type of {@link ClickEvent.Action#SUGGEST_COMMAND} and the
+     * given command for the current part.
      *
      * @param command the command to suggest in the player's chat box on click
      * @return this builder for chaining
@@ -121,8 +149,8 @@ public class XyComponentBuilder extends ComponentBuilder {
     }
 
     /**
-     * Sets the {@link ClickEvent} with type of {@link ClickEvent.Action#OPEN_URL}
-     * and the given URL for the current part.
+     * Sets the {@link ClickEvent} with type of {@link ClickEvent.Action#OPEN_URL} and the given URL
+     * for the current part.
      *
      * @param url the URL to open on click
      * @return this builder for chaining
@@ -133,8 +161,8 @@ public class XyComponentBuilder extends ComponentBuilder {
     }
 
     /**
-     * Sets the {@link ClickEvent} with type of {@link ClickEvent.Action#OPEN_FILE}
-     * and the given file for the current part.
+     * Sets the {@link ClickEvent} with type of {@link ClickEvent.Action#OPEN_FILE} and the given
+     * file for the current part.
      *
      * @param fileName the file name to open on click
      * @return this builder for chaining
@@ -145,8 +173,7 @@ public class XyComponentBuilder extends ComponentBuilder {
     }
 
     /**
-     * Appends the text to the builder and makes it the current target for
-     * formatting.
+     * Appends the text to the builder and makes it the current target for formatting.
      *
      * @param text  the text to append
      * @param color the color to set
@@ -159,8 +186,8 @@ public class XyComponentBuilder extends ComponentBuilder {
     }
 
     /**
-     * Appends the text to the builder and makes it the current target for
-     * formatting. You can specify the amount of formatting retained.
+     * Appends the text to the builder and makes it the current target for formatting. You can
+     * specify the amount of formatting retained.
      *
      * @param text      the text to append
      * @param color     the color to set
@@ -174,8 +201,7 @@ public class XyComponentBuilder extends ComponentBuilder {
     }
 
     /**
-     * Appends the text to the builder and makes it the current target for
-     * formatting.
+     * Appends the text to the builder and makes it the current target for formatting.
      *
      * @param text       the text to append
      * @param color      the color to set
@@ -254,7 +280,7 @@ public class XyComponentBuilder extends ComponentBuilder {
      * @return this ComponentBuilder for chaining
      */
     public XyComponentBuilder appendIf(boolean condition, String text) {
-        if (condition){
+        if (condition) {
             append(text);
         }
         return this;
@@ -268,7 +294,7 @@ public class XyComponentBuilder extends ComponentBuilder {
      * @return this ComponentBuilder for chaining
      */
     public XyComponentBuilder appendIf(boolean condition, Object object) {
-        if (condition){
+        if (condition) {
             append(object);
         }
         return this;
@@ -283,7 +309,7 @@ public class XyComponentBuilder extends ComponentBuilder {
      * @return this ComponentBuilder for chaining
      */
     public XyComponentBuilder appendIf(boolean condition, String text, ChatColor color) {
-        if (condition){
+        if (condition) {
             append(text, color);
         }
         return this;
@@ -298,7 +324,7 @@ public class XyComponentBuilder extends ComponentBuilder {
      * @return this ComponentBuilder for chaining
      */
     public XyComponentBuilder appendIf(boolean condition, Object object, ChatColor color) {
-        if (condition){
+        if (condition) {
             append(String.valueOf(object), color);
         }
         return this;
