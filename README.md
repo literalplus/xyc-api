@@ -47,6 +47,21 @@ To add a dependency on this project, add the following to the `<dependencies>` s
 
 You can look up the latest release version [at my build server](https://ci.l1t.li/job/public~xyc-api).
 
+Versioning
+----------
+
+Contrary to the implementation of XYC, which uses four version numbers, XYC-API only uses three.
+
+````
+4.0.1
+^ ^ ^
+| | |_ API release release: Non-breaking API changes and minor additions, independent of XYC
+| |
+| |_ XYC major release: Indicates which XYC version this version is compatible with
+|
+|_ XYC overall release: Indicates the XYC overall version this version is compatible with
+````
+
 License
 -------
 
