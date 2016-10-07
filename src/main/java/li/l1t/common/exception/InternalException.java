@@ -64,8 +64,8 @@ public class InternalException extends NonSensitiveException {
      * @param cause the SQL exception to wrap
      * @return a new InternalException
      */
-    public static InternalException wrap(SQLException cause) {
-        return new InternalException("Datenbankfehler.", cause);
+    public static DatabaseException wrap(SQLException cause) {
+        return new DatabaseException(cause);
     }
 
     /**
