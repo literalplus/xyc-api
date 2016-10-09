@@ -33,7 +33,11 @@ package li.l1t.common.exception;
  * @since 2016-10-07
  */
 public class DatabaseException extends InternalException {
+    protected DatabaseException(String message, Exception cause) {
+        super(message, cause);
+    }
+
     public DatabaseException(Exception cause) {
-        super("Datenbankfehler.", cause);
+        this("Datenbankfehler.", cause);
     }
 }
