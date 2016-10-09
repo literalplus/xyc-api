@@ -38,8 +38,8 @@ public interface CloseableResult extends AutoCloseable {
      * exceptions. This might also close the statement, depending on whether the implementation is
      * built for single-use or reusable statements.
      */
-    void tryClose();
-
+    @Override
+    void close();
 
     /**
      * @return the statement that was used to create this result
