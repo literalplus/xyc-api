@@ -25,8 +25,11 @@
 package li.l1t.common.sql.sane;
 
 import li.l1t.common.exception.DatabaseException;
+import li.l1t.common.exception.InternalException;
 import li.l1t.common.sql.sane.result.QueryResult;
 import li.l1t.common.sql.sane.result.UpdateResult;
+import li.l1t.common.sql.sane.scoped.RawScopedSession;
+import li.l1t.common.sql.sane.scoped.ScopedSession;
 
 /**
  * Manages a connection to a JDBC database, providing methods to query and update it with plain SQL
@@ -94,6 +97,16 @@ public interface SaneSql extends AutoCloseable {
      * @throws DatabaseException if an error occurs communicating with the database
      */
     int updateRaw(String sqlQuery, Object... parameters) throws DatabaseException;
+
+    /**
+     * Gets the current session used by the current thread if a session scope already exists or
+     * crates a new session and scope otherwise. <p><b>Important:</b> Refer to the {@link
+     * ScopedSession} class JavaDoc for important information regarding safe usage.</p>
+     *
+     * @return a scoped session
+     * @throws InternalException if the session lock cannot be obtained
+     */
+    RawScopedSession scoped();
 
     // We could also add batch update support like SafeSql has, but only if necessary
 }
