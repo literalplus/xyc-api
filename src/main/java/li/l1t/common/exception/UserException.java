@@ -28,7 +28,7 @@ package li.l1t.common.exception;
  * Represents an exception that will be shown to command senders as error they caused by providing
  * invalid arguments.
  *
- * @author <a href="http://xxyy.github.io/">xxyy</a>
+ * @author <a href="https://l1t.li/">Literallie</a>
  * @since 2016-08-23
  */
 public class UserException extends NonSensitiveException {

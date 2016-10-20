@@ -22,37 +22,52 @@
  * SOFTWARE.
  */
 
-package li.l1t.common.exception;
+package li.l1t.lanatus.api.purchase;
+
+import li.l1t.common.misc.Identifiable;
+import li.l1t.lanatus.api.position.Position;
+import li.l1t.lanatus.api.product.Product;
+
+import java.time.Instant;
+import java.util.UUID;
 
 /**
- * A kind of exception whose messages do not contain sensitive content and therefore can be shown to
- * players as-is.
+ * Represents a purchase made through Lanatus. Note that purchases need not correspond to an actual
+ * {@link Position}. This may be the case for one-time bonuses as well as for purchases which have
+ * been undone.
  *
  * @author <a href="https://l1t.li/">Literallie</a>
- * @since 2016-09-29
+ * @since 2016-09-28 (4.2.0)
  */
-public abstract class NonSensitiveException extends RuntimeException {
-    public NonSensitiveException(String message) {
-        super(message);
-    }
-
-    public NonSensitiveException(String message, Throwable cause) {
-        super(message, cause);
-    }
-
-    public NonSensitiveException(Throwable cause) {
-        super(cause);
-    }
+public interface Purchase extends Identifiable {
+    /**
+     * @return the unique id of the player whose account the purchase applies to
+     */
+    UUID getPlayerId();
 
     /**
-     * @return whether this exception should be logged to allow further investigation
+     * @return the product associated with this purchase
      */
-    public abstract boolean needsLogging();
+    Product getProduct();
 
     /**
-     * @return the message of this exception decorated with Minecraft formatting codes
+     * @return the instant this purchase was made at
      */
-    public String getColoredMessage() {
-        return "§c§lFehler: §c" + getLocalizedMessage();
-    }
+    Instant getCreationInstant();
+
+    /**
+     * @return the arbitrary string describing specifics of the product to its module
+     */
+    String getData();
+
+    /**
+     * @return the arbitrary string attached to this purchase for reference
+     */
+    String getComment();
+
+    /**
+     * @return the amount of melons that was actually spent on this purchase, may be negative if
+     * melons were given to the associated player
+     */
+    int getMelonsCost();
 }

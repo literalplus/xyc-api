@@ -30,7 +30,7 @@ import java.sql.SQLException;
  * Represents an exception that will be shown to command senders as 'internal exception' with the
  * provided reason string.
  *
- * @author <a href="http://xxyy.github.io/">xxyy</a>
+ * @author <a href="https://l1t.li/">Literallie</a>
  * @since 2016-08-23
  */
 public class InternalException extends NonSensitiveException {

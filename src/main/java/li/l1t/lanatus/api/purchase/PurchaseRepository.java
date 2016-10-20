@@ -22,39 +22,38 @@
  * SOFTWARE.
  */
 
-package li.l1t.common.util;
+package li.l1t.lanatus.api.purchase;
 
-import javax.annotation.Nullable;
+import li.l1t.common.exception.DatabaseException;
+import li.l1t.lanatus.api.LanatusRepository;
+import li.l1t.lanatus.api.exception.NoSuchPurchaseException;
+
+import java.util.Collection;
+import java.util.UUID;
 
 /**
- * Provides a static utility method to silently close {@link AutoCloseable} instances.
+ * A repository for purchases made through Lanatus.
  *
  * @author <a href="https://l1t.li/">Literallie</a>
- * @since 2016-10-09
+ * @since 2016-09-28 (4.2.0)
  */
-public class Closer {
-    private Closer() {
-
-    }
+public interface PurchaseRepository extends LanatusRepository {
+    /**
+     * Finds a purchase by its unique id.
+     *
+     * @param purchaseId the unique id of the purchase
+     * @return the purchase with given unique id
+     * @throws NoSuchPurchaseException if there is no such purchase
+     * @throws DatabaseException  if a database error occurs
+     */
+    Purchase findById(UUID purchaseId) throws NoSuchPurchaseException, DatabaseException;
 
     /**
-     * Attempts to close a closeable thing, swallowing any exception and doing nothing if it is
-     * null.
+     * Finds the collection of purchases a player has made.
      *
-     * @param closeable the thing to close
-     * @return {@code true} if the {@link AutoCloseable#close()} method did not throw any exception
-     * or the argument was {@code null}
+     * @param playerId the unique id of the player
+     * @return the collection of purchases, or an empty collection for none
+     * @throws DatabaseException if a database error occurs
      */
-    public static boolean close(@Nullable AutoCloseable closeable) {
-        if (closeable != null) {
-            try {
-                closeable.close();
-                return true;
-            } catch (Exception ignore) {
-                return false;
-            }
-        } else {
-            return true;
-        }
-    }
+    Collection<Purchase> findByPlayer(UUID playerId) throws DatabaseException;
 }

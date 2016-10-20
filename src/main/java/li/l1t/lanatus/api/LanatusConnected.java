@@ -22,39 +22,17 @@
  * SOFTWARE.
  */
 
-package li.l1t.common.util;
-
-import javax.annotation.Nullable;
+package li.l1t.lanatus.api;
 
 /**
- * Provides a static utility method to silently close {@link AutoCloseable} instances.
+ * Something that is connected to the Lanatus API.
  *
  * @author <a href="https://l1t.li/">Literallie</a>
- * @since 2016-10-09
+ * @since 2016-10-10 (4.2.0)
  */
-public class Closer {
-    private Closer() {
-
-    }
-
+public interface LanatusConnected {
     /**
-     * Attempts to close a closeable thing, swallowing any exception and doing nothing if it is
-     * null.
-     *
-     * @param closeable the thing to close
-     * @return {@code true} if the {@link AutoCloseable#close()} method did not throw any exception
-     * or the argument was {@code null}
+     * @return the client this repository is associated with
      */
-    public static boolean close(@Nullable AutoCloseable closeable) {
-        if (closeable != null) {
-            try {
-                closeable.close();
-                return true;
-            } catch (Exception ignore) {
-                return false;
-            }
-        } else {
-            return true;
-        }
-    }
+    LanatusClient client();
 }

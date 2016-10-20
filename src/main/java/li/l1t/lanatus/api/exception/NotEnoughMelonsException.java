@@ -22,39 +22,43 @@
  * SOFTWARE.
  */
 
-package li.l1t.common.util;
+package li.l1t.lanatus.api.exception;
 
-import javax.annotation.Nullable;
+import com.google.common.base.Preconditions;
+import li.l1t.common.exception.UserException;
+import li.l1t.lanatus.api.account.LanatusAccount;
 
 /**
- * Provides a static utility method to silently close {@link AutoCloseable} instances.
+ * Thrown if there are not enough melons in an account for a transaction, e.g. a purchase.
  *
  * @author <a href="https://l1t.li/">Literallie</a>
- * @since 2016-10-09
+ * @since 2016-10-07 (4.2.0)
  */
-public class Closer {
-    private Closer() {
+public class NotEnoughMelonsException extends UserException {
+    private final LanatusAccount account;
+    private final int melonsMissing;
 
+    public NotEnoughMelonsException(LanatusAccount account, int melonsMissing) {
+        super(String.format(
+                "Das kannst du dir nicht leisten! (Du hast %d Melonen, dir fehlen %d)",
+                Preconditions.checkNotNull(account, "account").getMelonsCount(),
+                melonsMissing
+        ));
+        this.account = account;
+        this.melonsMissing = melonsMissing;
     }
 
     /**
-     * Attempts to close a closeable thing, swallowing any exception and doing nothing if it is
-     * null.
-     *
-     * @param closeable the thing to close
-     * @return {@code true} if the {@link AutoCloseable#close()} method did not throw any exception
-     * or the argument was {@code null}
+     * @return the amount of melons additionally required in the account to complete the transaction
      */
-    public static boolean close(@Nullable AutoCloseable closeable) {
-        if (closeable != null) {
-            try {
-                closeable.close();
-                return true;
-            } catch (Exception ignore) {
-                return false;
-            }
-        } else {
-            return true;
-        }
+    public int getMelonsMissing() {
+        return melonsMissing;
+    }
+
+    /**
+     * @return the account involved in the transaction
+     */
+    public LanatusAccount getAccount() {
+        return account;
     }
 }

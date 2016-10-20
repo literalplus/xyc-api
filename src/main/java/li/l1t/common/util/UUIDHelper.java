@@ -33,7 +33,7 @@ import java.util.regex.Pattern;
  * Static utility class providing some helpful methods for dealing with UUIDs in the context of
  * Minecraft.
  *
- * @author <a href="http://xxyy.github.io/">xxyy</a>
+ * @author <a href="https://l1t.li/">Literallie</a>
  * @since 4.8.14
  */
 public class UUIDHelper {

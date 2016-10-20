@@ -31,7 +31,7 @@ import com.google.common.base.Preconditions;
  * x axis is horizontal and the y axis is vertical. (0, 0) is the top left slot.
  * <p>This implementation is immutable.</p>
  *
- * @author <a href="http://xxyy.github.io/">xxyy</a>
+ * @author <a href="https://l1t.li/">Literallie</a>
  * @since 2016-07-22
  */
 public class SlotPosition {

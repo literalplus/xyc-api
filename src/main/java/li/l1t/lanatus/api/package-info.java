@@ -22,39 +22,14 @@
  * SOFTWARE.
  */
 
-package li.l1t.common.util;
-
-import javax.annotation.Nullable;
-
 /**
- * Provides a static utility method to silently close {@link AutoCloseable} instances.
+ * XYC Lanatus is a common API to access certain premium data of players. This includes a common,
+ * unified currency called melons and also a common 'last rank' field. It aims to support concurrent
+ * modification. Furthermore, built-in facilities to manage products and make purchases using melons
+ * are provided.<p> The name originates from the Latin name for watermelons, which is {@code
+ * Citrullus lanatus var. lanatus}.</p>
  *
  * @author <a href="https://l1t.li/">Literallie</a>
- * @since 2016-10-09
+ * @since 2016-09-28 (4.2.0)
  */
-public class Closer {
-    private Closer() {
-
-    }
-
-    /**
-     * Attempts to close a closeable thing, swallowing any exception and doing nothing if it is
-     * null.
-     *
-     * @param closeable the thing to close
-     * @return {@code true} if the {@link AutoCloseable#close()} method did not throw any exception
-     * or the argument was {@code null}
-     */
-    public static boolean close(@Nullable AutoCloseable closeable) {
-        if (closeable != null) {
-            try {
-                closeable.close();
-                return true;
-            } catch (Exception ignore) {
-                return false;
-            }
-        } else {
-            return true;
-        }
-    }
-}
+package li.l1t.lanatus.api;

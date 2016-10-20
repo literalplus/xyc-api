@@ -22,39 +22,22 @@
  * SOFTWARE.
  */
 
-package li.l1t.common.util;
+package li.l1t.lanatus.api.exception;
 
-import javax.annotation.Nullable;
+import li.l1t.common.exception.InternalException;
 
 /**
- * Provides a static utility method to silently close {@link AutoCloseable} instances.
+ * Thrown if there is no row matching given criteria, but a row was required.
  *
  * @author <a href="https://l1t.li/">Literallie</a>
- * @since 2016-10-09
+ * @since 2016-09-28 (4.2.0)
  */
-public class Closer {
-    private Closer() {
-
+public class NoSuchRowException extends InternalException {
+    public NoSuchRowException(String message) {
+        super(message);
     }
 
-    /**
-     * Attempts to close a closeable thing, swallowing any exception and doing nothing if it is
-     * null.
-     *
-     * @param closeable the thing to close
-     * @return {@code true} if the {@link AutoCloseable#close()} method did not throw any exception
-     * or the argument was {@code null}
-     */
-    public static boolean close(@Nullable AutoCloseable closeable) {
-        if (closeable != null) {
-            try {
-                closeable.close();
-                return true;
-            } catch (Exception ignore) {
-                return false;
-            }
-        } else {
-            return true;
-        }
+    public NoSuchRowException(String message, Throwable cause) {
+        super(message, cause);
     }
 }

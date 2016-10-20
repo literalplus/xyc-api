@@ -22,39 +22,38 @@
  * SOFTWARE.
  */
 
-package li.l1t.common.util;
+package li.l1t.lanatus.api.position;
 
-import javax.annotation.Nullable;
+import li.l1t.lanatus.api.product.Product;
+
+import java.util.UUID;
 
 /**
- * Provides a static utility method to silently close {@link AutoCloseable} instances.
+ * Represents a single item actually owned by a player that was purchased through Lanatus. This
+ * usually corresponds to a persistent premium feature, since one-time bonuses are not assigned
+ * positions.
  *
  * @author <a href="https://l1t.li/">Literallie</a>
- * @since 2016-10-09
+ * @since 2016-09-28 (4.2.0)
  */
-public class Closer {
-    private Closer() {
-
-    }
+public interface Position {
+    /**
+     * @return the unique id of the purchase this position corresponds to
+     */
+    UUID getPurchaseId();
 
     /**
-     * Attempts to close a closeable thing, swallowing any exception and doing nothing if it is
-     * null.
-     *
-     * @param closeable the thing to close
-     * @return {@code true} if the {@link AutoCloseable#close()} method did not throw any exception
-     * or the argument was {@code null}
+     * @return the unique id of the player owning this position
      */
-    public static boolean close(@Nullable AutoCloseable closeable) {
-        if (closeable != null) {
-            try {
-                closeable.close();
-                return true;
-            } catch (Exception ignore) {
-                return false;
-            }
-        } else {
-            return true;
-        }
-    }
+    UUID getPlayerId();
+
+    /**
+     * @return the product this position corresponds to
+     */
+    Product getProduct();
+
+    /**
+     * @return the arbitrary data describing specifics of this position to its module
+     */
+    String getData();
 }

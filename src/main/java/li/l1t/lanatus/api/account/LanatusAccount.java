@@ -22,39 +22,39 @@
  * SOFTWARE.
  */
 
-package li.l1t.common.util;
+package li.l1t.lanatus.api.account;
 
-import javax.annotation.Nullable;
+import java.util.UUID;
 
 /**
- * Provides a static utility method to silently close {@link AutoCloseable} instances.
+ * Represents an account in Lanatus. Implementations must specify mutability behaviour.
  *
  * @author <a href="https://l1t.li/">Literallie</a>
- * @since 2016-10-09
+ * @since 2016-09-29 (4.2.0)
  */
-public class Closer {
-    private Closer() {
-
-    }
+public interface LanatusAccount {
+    /**
+     * The name of the default rank that is assigned to accounts at creation time.
+     */
+    String DEFAULT_RANK = "default";
 
     /**
-     * Attempts to close a closeable thing, swallowing any exception and doing nothing if it is
-     * null.
-     *
-     * @param closeable the thing to close
-     * @return {@code true} if the {@link AutoCloseable#close()} method did not throw any exception
-     * or the argument was {@code null}
+     * The amount of melons accounts have at creation time.
      */
-    public static boolean close(@Nullable AutoCloseable closeable) {
-        if (closeable != null) {
-            try {
-                closeable.close();
-                return true;
-            } catch (Exception ignore) {
-                return false;
-            }
-        } else {
-            return true;
-        }
-    }
+    int INITIAL_MELONS_COUNT = 0;
+
+    /**
+     * @return the unique id of the player the account belongs to
+     */
+    UUID getPlayerId();
+
+    /**
+     * @return the amount of melons in this account
+     */
+    int getMelonsCount();
+
+    /**
+     * @return the most recently known rank of this account
+     */
+    String getLastRank();
 }

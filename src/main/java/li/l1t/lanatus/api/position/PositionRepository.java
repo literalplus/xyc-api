@@ -22,39 +22,43 @@
  * SOFTWARE.
  */
 
-package li.l1t.common.util;
+package li.l1t.lanatus.api.position;
 
-import javax.annotation.Nullable;
+
+import li.l1t.lanatus.api.LanatusRepository;
+
+import java.util.Collection;
+import java.util.Optional;
+import java.util.UUID;
 
 /**
- * Provides a static utility method to silently close {@link AutoCloseable} instances.
+ * A repository for positions. Note that results may be cached.
  *
  * @author <a href="https://l1t.li/">Literallie</a>
- * @since 2016-10-09
+ * @since 2016-09-28 (4.2.0)
  */
-public class Closer {
-    private Closer() {
-
-    }
+public interface PositionRepository extends LanatusRepository {
+    /**
+     * Finds the position belonging to a purchase, if any.
+     *
+     * @param purchaseId the purchase to search for
+     * @return an Optional containing the associated purchase if it exists, otherwise an empty
+     * Optional
+     */
+    Optional<Position> findByPurchase(UUID purchaseId);
 
     /**
-     * Attempts to close a closeable thing, swallowing any exception and doing nothing if it is
-     * null.
+     * Finds all positions currently associated with given player.
      *
-     * @param closeable the thing to close
-     * @return {@code true} if the {@link AutoCloseable#close()} method did not throw any exception
-     * or the argument was {@code null}
+     * @param playerId the unique id of the player
+     * @return the collection of positions, or an empty collection if none
      */
-    public static boolean close(@Nullable AutoCloseable closeable) {
-        if (closeable != null) {
-            try {
-                closeable.close();
-                return true;
-            } catch (Exception ignore) {
-                return false;
-            }
-        } else {
-            return true;
-        }
-    }
+    Collection<Position> findAllByPlayer(UUID playerId);
+
+    /**
+     * @param playerId  the unique id of the player
+     * @param productId the unique id of the product
+     * @return whether given player has a position matching given product
+     */
+    boolean playerHasProduct(UUID playerId, UUID productId);
 }

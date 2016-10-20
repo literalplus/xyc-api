@@ -22,39 +22,38 @@
  * SOFTWARE.
  */
 
-package li.l1t.common.util;
+package li.l1t.lanatus.api.exception;
 
-import javax.annotation.Nullable;
+import li.l1t.lanatus.api.account.AccountSnapshot;
+import li.l1t.lanatus.api.account.MutableAccount;
 
 /**
- * Provides a static utility method to silently close {@link AutoCloseable} instances.
+ * Thrown if a conflict arises while attempting to merge a local copy of an account back into the
+ * database.
  *
  * @author <a href="https://l1t.li/">Literallie</a>
- * @since 2016-10-09
+ * @since 2016-09-28 (4.2.0)
  */
-public class Closer {
-    private Closer() {
+public class AccountConflictException extends Exception {
+    private final AccountSnapshot databaseState;
+    private final MutableAccount localState;
 
+    public AccountConflictException(AccountSnapshot databaseState, MutableAccount localState) {
+        this.databaseState = databaseState;
+        this.localState = localState;
     }
 
     /**
-     * Attempts to close a closeable thing, swallowing any exception and doing nothing if it is
-     * null.
-     *
-     * @param closeable the thing to close
-     * @return {@code true} if the {@link AutoCloseable#close()} method did not throw any exception
-     * or the argument was {@code null}
+     * @return the conflicting state of the database
      */
-    public static boolean close(@Nullable AutoCloseable closeable) {
-        if (closeable != null) {
-            try {
-                closeable.close();
-                return true;
-            } catch (Exception ignore) {
-                return false;
-            }
-        } else {
-            return true;
-        }
+    public AccountSnapshot getDatabaseState() {
+        return databaseState;
+    }
+
+    /**
+     * @return the local account state that could not be merged
+     */
+    public MutableAccount getLocalState() {
+        return localState;
     }
 }

@@ -22,39 +22,24 @@
  * SOFTWARE.
  */
 
-package li.l1t.common.util;
+package li.l1t.lanatus.api.account;
 
-import javax.annotation.Nullable;
+import java.time.Instant;
 
 /**
- * Provides a static utility method to silently close {@link AutoCloseable} instances.
+ * An immutable snapshot of the state of a Lanatus account.
  *
  * @author <a href="https://l1t.li/">Literallie</a>
- * @since 2016-10-09
+ * @since 2016-09-28 (4.2.0)
  */
-public class Closer {
-    private Closer() {
-
-    }
+public interface AccountSnapshot extends LanatusAccount {
+    /**
+     * @return the instant at which this snapshot was taken
+     */
+    Instant getSnapshotInstant();
 
     /**
-     * Attempts to close a closeable thing, swallowing any exception and doing nothing if it is
-     * null.
-     *
-     * @param closeable the thing to close
-     * @return {@code true} if the {@link AutoCloseable#close()} method did not throw any exception
-     * or the argument was {@code null}
+     * @return whether the values of this snapshot are equal to the default values
      */
-    public static boolean close(@Nullable AutoCloseable closeable) {
-        if (closeable != null) {
-            try {
-                closeable.close();
-                return true;
-            } catch (Exception ignore) {
-                return false;
-            }
-        } else {
-            return true;
-        }
-    }
+    boolean isDefault();
 }

@@ -36,7 +36,7 @@ import net.md_5.bungee.api.chat.TextComponent;
  * A drop-in replacement for {@link ComponentBuilder} which adds some additional convenience methods
  * in order to achieve simpler configuration.
  *
- * @author <a href="http://xxyy.github.io/">xxyy</a>
+ * @author <a href="https://l1t.li/">Literallie</a>
  * @since 2015-08-31
  */
 public class XyComponentBuilder extends ComponentBuilder {
