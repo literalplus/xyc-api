@@ -64,7 +64,7 @@ public final class SqlConnectables {
      * @return a host string derived from given parameters
      */
     public static String getHostString(String database, String jdbcUrl) {
-        String hostString = appendDatabaseIfNotAlreadyPresent(database, jdbcUrl);
+        String hostString = jdbcUrl;
 
         if (!hostString.startsWith("jdbc:")) {
             if (!hostString.startsWith("mysql://")) {
@@ -74,15 +74,19 @@ public final class SqlConnectables {
             }
         }
 
-        if (!hostString.contains("?")) {
-            hostString += "?autoReconnect=true";
+        if (hostString.startsWith("jdbc:mysql")) { //MySQL-specific features
+            hostString = appendDatabaseIfNotAlreadyPresent(database, jdbcUrl);
+            if (!hostString.contains("?")) {
+                hostString += "?autoReconnect=true";
+            }
         }
 
         return hostString;
     }
 
     private static String appendDatabaseIfNotAlreadyPresent(String database, String jdbcUrl) {
-        if (jdbcUrl.contains(database)) { //some databases allow parameters with ?, so can't use endsWith
+        if (jdbcUrl.contains(database) || jdbcUrl.contains("?")) {
+            //MySQL allows parameters with ?, can't really operate on that
             return jdbcUrl;
         } else if (jdbcUrl.endsWith("/")) {
             return jdbcUrl + database;
