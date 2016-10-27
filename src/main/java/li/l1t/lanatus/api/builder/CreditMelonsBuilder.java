@@ -58,9 +58,9 @@ public interface CreditMelonsBuilder {
     /**
      * Sets the melons count to be credited to the player.
      *
-     * @param melonsCount the amount of melons to credit
+     * @param melonsCount the amount of melons to credit, or the amount of melons to withdraw from
+     *                    the player's account if negative
      * @return this builder
-     * @throws IllegalArgumentException if melonsCount is negative
      */
     CreditMelonsBuilder withMelonsCount(int melonsCount);
 
