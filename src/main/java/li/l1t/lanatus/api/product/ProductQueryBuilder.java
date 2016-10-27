@@ -27,6 +27,7 @@ package li.l1t.lanatus.api.product;
 import li.l1t.common.exception.DatabaseException;
 import li.l1t.lanatus.api.LanatusConnected;
 
+import javax.annotation.Nonnull;
 import java.util.Collection;
 
 /**
@@ -71,10 +72,10 @@ public interface ProductQueryBuilder extends LanatusConnected {
      * query, effectively doing nothing.
      *
      * @param searchTerm the term products must contain in order to be included in the result, or an
-     *                   empty string to disable contaions search (the default)
+     *                   empty string to disable contains search (the default)
      * @return this builder
      */
-    ProductQueryBuilder containing(String searchTerm);
+    ProductQueryBuilder containing(@Nonnull String searchTerm);
 
     /**
      * Selects only active products, meaning that the query will only return active products.
