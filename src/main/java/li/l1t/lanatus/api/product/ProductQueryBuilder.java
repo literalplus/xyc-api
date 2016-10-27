@@ -59,7 +59,10 @@ public interface ProductQueryBuilder extends LanatusConnected {
     /**
      * @param nameFilter the name to select
      * @return this builder
+     * @deprecated since products no longer have names, this method is kind of obsolete, and may be
+     * ignored by implementations
      */
+    @Deprecated
     ProductQueryBuilder withName(String nameFilter);
 
     /**
