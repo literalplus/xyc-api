@@ -66,6 +66,17 @@ public interface ProductQueryBuilder extends LanatusConnected {
     ProductQueryBuilder withName(String nameFilter);
 
     /**
+     * Limits the result of the query to products containing given search term in display name,
+     * description, or module name. Note that an empty string as a search term does not limit the
+     * query, effectively doing nothing.
+     *
+     * @param searchTerm the term products must contain in order to be included in the result, or an
+     *                   empty string to disable contaions search (the default)
+     * @return this builder
+     */
+    ProductQueryBuilder containing(String searchTerm);
+
+    /**
      * Selects only active products, meaning that the query will only return active products.
      *
      * @return this builder
