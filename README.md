@@ -55,7 +55,8 @@ Contrary to the implementation of XYC, which uses four version numbers, XYC-API 
 ````
 4.0.1
 ^ ^ ^
-| | |_ API release: Non-breaking API changes and minor additions, independent of XYC
+| | |_ API release: In theory, non-breaking API changes and minor additions, independent of XYC
+| |                 In practice, these small things I forgot, sometimes breaking too
 | |
 | |_ XYC major release: Indicates which XYC version this version is compatible with
 |
