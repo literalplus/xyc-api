@@ -26,6 +26,7 @@ package li.l1t.common.collections.cache;
 
 import java.util.Optional;
 import java.util.function.Function;
+import java.util.stream.Stream;
 
 /**
  * Caches things that are identifiable and can be uniquely mapped back to an identifier. Cache
@@ -108,4 +109,9 @@ public interface IdCache<K, V> {
      * returned for given key that is {@link Object#equals(Object) equal} to given value
      */
     boolean containsValue(V value);
+
+    /**
+     * @return a stream of all current entries of this cache
+     */
+    Stream<V> stream();
 }

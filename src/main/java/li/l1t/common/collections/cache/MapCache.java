@@ -24,8 +24,10 @@
 
 package li.l1t.common.collections.cache;
 
+import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
+import java.util.stream.Stream;
 
 /**
  * Caches mappings from one thing to another thing. Implementations may implement ways to
@@ -92,4 +94,19 @@ public interface MapCache<K, V> {
      * @return whether given key is currently part of a valid mapping
      */
     boolean containsKey(K key);
+
+    /**
+     * @return a stream of all current entries of this cache
+     */
+    Stream<Map.Entry<K, V>> entryStream();
+
+    /**
+     * @return a stream of all current keys of this cache
+     */
+    Stream<K> keyStream();
+
+    /**
+     * @return a stream of all current values of this cache
+     */
+    Stream<V> valueStream();
 }
