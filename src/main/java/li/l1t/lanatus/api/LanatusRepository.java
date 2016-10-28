@@ -25,15 +25,10 @@
 package li.l1t.lanatus.api;
 
 /**
- * A repository associated with a Lanatus client. <p>Note that all methods that access the database
- * may throw {@link li.l1t.common.exception.InternalException}s if a database failure occurs.</p>
+ * A repository associated with a Lanatus client.
  *
  * @author <a href="https://l1t.li/">Literallie</a>
  * @since 2016-09-28 (4.2.0)
  */
-public interface LanatusRepository extends LanatusConnected {
-    /**
-     * Clears any caches that this repository may keep.
-     */
-    void clearCache();
+public interface LanatusRepository extends LanatusConnected, LanatusCache {
 }

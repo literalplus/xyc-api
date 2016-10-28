@@ -40,7 +40,7 @@ import java.util.UUID;
  * @author <a href="https://l1t.li/">Literallie</a>
  * @since 2016-09-28 (4.2.0)
  */
-public interface LanatusClient {
+public interface LanatusClient extends LanatusCache {
     /**
      * @return the unique name of the module this client is for, must not be longer than 20
      * characters
@@ -82,4 +82,5 @@ public interface LanatusClient {
      * @return a new purchase builder
      */
     CreditMelonsBuilder creditMelons(UUID playerId);
+
 }
