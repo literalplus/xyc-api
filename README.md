@@ -63,6 +63,18 @@ Contrary to the implementation of XYC, which uses four version numbers, XYC-API 
 |_ XYC overall release: Indicates the XYC overall version this version is compatible with
 ````
 
+To be sure what exactly a new XYC-API version breaks, breaking commits are prepended with
+special tags indicating the kind of breakage:
+
+ * `[IMPL]` - breaks current implementations of an affected interface or abstract class
+               by adding new abstract methods
+ * `[API]` - breaks current consumers of the affected API by changing or removing methods
+ * `[BREAKING]` - severely breaks consumers or implementations by either removing whole
+               classes or APIs or changing them significantly
+ * `Deprecate` - annotates that this commit deprecates something, meaning that users should
+               switch to alternatives documented in JavaDoc as soon as possible. The commit
+               message may include details on the how to migrate.
+
 License
 -------
 
