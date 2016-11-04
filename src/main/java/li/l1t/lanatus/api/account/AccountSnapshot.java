@@ -25,6 +25,8 @@
 package li.l1t.lanatus.api.account;
 
 import java.time.Instant;
+import java.util.Optional;
+import java.util.UUID;
 
 /**
  * An immutable snapshot of the state of a Lanatus account.
@@ -44,6 +46,8 @@ public interface AccountSnapshot extends LanatusAccount {
      * repository that fetched this snapshot how it handles non-existing snapshots.
      *
      * @return whether the account existed at snapshot instant
+     * @deprecated Use {@link AccountRepository#find(UUID)} and {@link Optional#isPresent()}.
      */
+    @Deprecated
     boolean existed();
 }
