@@ -39,7 +39,11 @@ public interface AccountSnapshot extends LanatusAccount {
     Instant getSnapshotInstant();
 
     /**
-     * @return whether the values of this snapshot are equal to the default values
+     * Gets whether the account represented by this snapshot existed in the database at the time
+     * this snapshot was fetched. Note that it depends on the implementation of the account
+     * repository that fetched this snapshot how it handles non-existing snapshots.
+     *
+     * @return whether the account existed at snapshot instant
      */
-    boolean isDefault();
+    boolean existed();
 }
