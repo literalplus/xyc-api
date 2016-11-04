@@ -28,6 +28,7 @@ import li.l1t.common.exception.DatabaseException;
 import li.l1t.lanatus.api.LanatusRepository;
 import li.l1t.lanatus.api.exception.AccountConflictException;
 
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -67,6 +68,16 @@ public interface AccountRepository extends LanatusRepository {
      * @throws DatabaseException        if a database error occurs
      */
     void save(MutableAccount localCopy) throws AccountConflictException, DatabaseException;
+
+    /**
+     * Optionally gets the a snapshot of an account for read-only purposes.
+     *
+     * @param playerId the unique id of the player whose account information to snapshot
+     * @return an optional containing the snapshot of given player's account or an empty optional if
+     * no account exists for given player
+     * @throws DatabaseException if a database error occurs
+     */
+    Optional<AccountSnapshot> find(UUID playerId) throws DatabaseException;
 
     /**
      * Gets the a snapshot of an account for read-only purposes, or a snapshot of the defaults if
