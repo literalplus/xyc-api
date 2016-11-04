@@ -46,9 +46,11 @@ import java.util.UUID;
 public interface AccountRepository extends LanatusRepository {
 
     /**
-     * Gets the current state of an account for mutation. If the account does not yet exist, it is
-     * created. <p><b>Note:</b> Try to keep the scope for your mutable accounts as small as
-     * possible. See the {@link MutableAccount} class JavaDoc for details.</p>
+     * Gets the current state of an account for mutation. If there is not et an account for given
+     * player, an account initialised to the default values is returned. Note that the account does
+     * not get created in the database immediately, but only when it is saved. <p><b>Note:</b> Try
+     * to keep the scope for your mutable accounts as small as possible. See the {@link
+     * MutableAccount} class JavaDoc for details.</p>
      *
      * @param playerId the unique id of the player whose account information to retrieve
      * @return the mutable account state
@@ -67,14 +69,15 @@ public interface AccountRepository extends LanatusRepository {
     void save(MutableAccount localCopy) throws AccountConflictException, DatabaseException;
 
     /**
-     * Gets the a snapshot of an account for read-only purposes.
+     * Gets the a snapshot of an account for read-only purposes, or a snapshot of the defaults if
+     * the account does not exist.
      *
      * @param playerId the unique id of the player whose account information to snapshot
      * @return an immutable snapshot of that player's account, or a snapshot of the defaults if
      * there is no account for given player
      * @throws DatabaseException if a database error occurs
      */
-    AccountSnapshot find(UUID playerId) throws DatabaseException;
+    AccountSnapshot findOrDefault(UUID playerId) throws DatabaseException;
 
     /**
      * Refreshes the state of an immutable account from the database and returns a new immutable
