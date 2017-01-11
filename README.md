@@ -83,7 +83,7 @@ This project is licensed under the MIT license:
 ````
 MIT License
 
-Copyright (c) 2016 Philipp Nowak (Literallie)
+Copyright (c) 2016-2017 Philipp Nowak (Literallie)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
