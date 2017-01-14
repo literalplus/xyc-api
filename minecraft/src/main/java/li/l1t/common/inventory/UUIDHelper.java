@@ -34,9 +34,16 @@ import java.util.regex.Pattern;
  * Minecraft.
  *
  * @author <a href="https://l1t.li/">Literallie</a>
- * @since 4.8.14
+ * @since 2014-08-04
  */
 public class UUIDHelper {
+    /**
+     * The nil UUID - a special UUID which can be used to represent special values, such as the Minecraft server
+     * console. {@code 00000000-0000-0000-0000-000000000000}
+     *
+     * @since 4.4.0
+     */
+    public static final UUID NIL_UUID = UUID.fromString("00000000-0000-0000-0000-000000000000");
     /**
      * A Pattern that matches valid Java UUIDs.
      */
