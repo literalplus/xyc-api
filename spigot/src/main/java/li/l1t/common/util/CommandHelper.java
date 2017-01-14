@@ -30,8 +30,8 @@
 package li.l1t.common.util;
 
 import com.google.common.base.Preconditions;
+import li.l1t.common.command.BukkitExecution;
 import li.l1t.common.command.CommandBehaviours;
-import li.l1t.common.command.CommandExecution;
 import li.l1t.common.command.PlayerOnlyException;
 import li.l1t.common.inventory.UUIDHelper;
 import org.apache.commons.lang.StringUtils;
@@ -208,7 +208,7 @@ public class CommandHelper {
      * @return {@code false} if given sender is an instance of {@link Player}
      * @deprecated This method does not support internationalisation and encourages usage of returns for errors, where
      * exceptions would make the code much more readable and result in less cyclomatic complexity. Use {@link
-     * CommandExecution#requireIsPlayer()}, {@link PlayerOnlyException}, or {@link CommandBehaviours#playerOnly()}
+     * BukkitExecution#requireIsPlayer()}, {@link PlayerOnlyException}, or {@link CommandBehaviours#playerOnly()}
      * instead.
      */
     public static boolean kickConsoleFromMethod(CommandSender sender, String label) {
