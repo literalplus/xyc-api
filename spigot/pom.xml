@@ -26,29 +26,30 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
     <parent>
         <artifactId>xyc-api-parent</artifactId>
         <groupId>li.l1t.common</groupId>
         <version>4.4.0-SNAPSHOT</version>
     </parent>
-    <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>xyc-api-minecraft</artifactId>
-    <name>XYC-API Minecraft</name>
+    <artifactId>xyc-api-spigot</artifactId>
+
+    <name>XYC-API Spigot</name>
     <description>
         The public XYC API provides some interfaces and simple classes which are common to multiple projects.
-        This module contains code specific to Minecraft in general. Some parts contain a complete
-        implementation, while for others, only the API is provided.
+        This module contains code specific to the Spigot Minecraft server implementation. Some parts contain
+        a complete implementation, while for others, only the API is provided.
     </description>
 
     <dependencies>
         <dependency>
-            <groupId>net.md-5</groupId>
-            <artifactId>bungeecord-chat</artifactId>
+            <groupId>org.spigotmc</groupId>
+            <artifactId>spigot-api</artifactId>
         </dependency>
         <dependency>
             <groupId>li.l1t.common</groupId>
-            <artifactId>xyc-api</artifactId>
+            <artifactId>xyc-api-minecraft</artifactId>
         </dependency>
     </dependencies>
 </project>
