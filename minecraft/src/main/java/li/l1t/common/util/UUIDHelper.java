@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package li.l1t.common.inventory;
+package li.l1t.common.util;
 
 import com.google.common.base.Charsets;
 

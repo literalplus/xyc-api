@@ -33,7 +33,6 @@ import com.google.common.base.Preconditions;
 import li.l1t.common.command.BukkitExecution;
 import li.l1t.common.command.CommandBehaviours;
 import li.l1t.common.command.PlayerOnlyException;
-import li.l1t.common.inventory.UUIDHelper;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
