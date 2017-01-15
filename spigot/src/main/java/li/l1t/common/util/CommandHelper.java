@@ -31,7 +31,6 @@ package li.l1t.common.util;
 
 import com.google.common.base.Preconditions;
 import li.l1t.common.command.BukkitExecution;
-import li.l1t.common.command.CommandBehaviours;
 import li.l1t.common.command.PlayerOnlyException;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
@@ -84,8 +83,7 @@ public class CommandHelper {
      * @return Whether {@code sender} had the permission required.
      * @deprecated This method does not support internationalisation and encourages usage of returns for errors, where
      * exceptions would make the code much more readable and result in less cyclomatic complexity. Use {@link
-     * BukkitExecution#requirePermission(String)}, {@link li.l1t.common.command.UserPermissionException}, or {@link
-     * CommandBehaviours#permissionChecking(String)} instead.
+     * BukkitExecution#requirePermission(String)}, or {@link li.l1t.common.command.UserPermissionException} instead.
      */
     @Deprecated
     public static boolean checkActionPermAndMsg(CommandSender sender, String permission, String action) {
@@ -106,8 +104,7 @@ public class CommandHelper {
      * @return whether sender has permission.
      * @deprecated This method does not support internationalisation and encourages usage of returns for errors, where
      * exceptions would make the code much more readable and result in less cyclomatic complexity. Use {@link
-     * BukkitExecution#requirePermission(String)}, {@link li.l1t.common.command.UserPermissionException}, or {@link
-     * CommandBehaviours#permissionChecking(String)} instead.
+     * BukkitExecution#requirePermission(String)}, or {@link li.l1t.common.command.UserPermissionException} instead.
      */
     @Deprecated
     public static boolean checkPermAndMsg(CommandSender sender, String permission, String label) {
@@ -255,7 +252,7 @@ public class CommandHelper {
      * @return {@code false} if given sender is an instance of {@link Player}
      * @deprecated This method does not support internationalisation and encourages usage of returns for errors, where
      * exceptions would make the code much more readable and result in less cyclomatic complexity. Use {@link
-     * BukkitExecution#requireIsPlayer()}, {@link PlayerOnlyException}, or {@link CommandBehaviours#playerOnly()}
+     * BukkitExecution#requireIsPlayer()}, or {@link PlayerOnlyException}
      * instead.
      */
     public static boolean kickConsoleFromMethod(CommandSender sender, String label) {
