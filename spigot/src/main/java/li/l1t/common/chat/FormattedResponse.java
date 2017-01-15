@@ -100,7 +100,6 @@ public interface FormattedResponse extends Response {
      * and avoids an unnecessary array copy.</p>
      *
      * @param arguments {@inheritDoc}
-     * @return {@inheritDoc}
      * @see #format(Object...) for notes on how the arguments are processed
      */
     @Override
@@ -121,7 +120,6 @@ public interface FormattedResponse extends Response {
      * unnecessary array copy.</p>
      *
      * @param arguments {@inheritDoc}
-     * @return {@inheritDoc}
      * @see #format(Object...) for notes on how the arguments are processed
      */
     @Override
