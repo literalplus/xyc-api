@@ -25,10 +25,7 @@
 package li.l1t.common.command;
 
 import com.google.common.base.Preconditions;
-import li.l1t.common.chat.Arguments;
-import li.l1t.common.chat.FormattedResponse;
-import li.l1t.common.chat.Response;
-import li.l1t.common.chat.XyComponentBuilder;
+import li.l1t.common.chat.*;
 import li.l1t.common.exception.UserException;
 import li.l1t.common.util.CommandHelper;
 import net.md_5.bungee.api.ChatColor;

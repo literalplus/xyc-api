@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package li.l1t.common.command;
+package li.l1t.common.chat;
 
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
