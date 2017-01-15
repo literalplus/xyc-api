@@ -26,6 +26,7 @@ package li.l1t.common.command;
 
 import com.google.common.base.Preconditions;
 import li.l1t.common.chat.Arguments;
+import li.l1t.common.chat.FormattedResponse;
 import li.l1t.common.chat.Response;
 import li.l1t.common.chat.XyComponentBuilder;
 import li.l1t.common.exception.UserException;
@@ -166,8 +167,13 @@ public class SimpleBukkitExecution implements BukkitExecution {
     }
 
     @Override
-    public void respond(Response format, Object... params) {
-        format.sendTo(sender, params);
+    public void respond(Response response, Object... arguments) {
+        response.sendTo(sender, arguments);
+    }
+
+    @Override
+    public void respond(FormattedResponse response, String message, Object... parameters) {
+        response.sendTo(sender, message, parameters);
     }
 
     @Override

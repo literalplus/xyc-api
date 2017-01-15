@@ -24,6 +24,7 @@
 
 package li.l1t.common.command;
 
+import li.l1t.common.chat.FormattedResponse;
 import li.l1t.common.chat.Response;
 import li.l1t.common.util.CommandHelper;
 import net.md_5.bungee.api.chat.BaseComponent;
@@ -92,12 +93,24 @@ public interface BukkitExecution extends ArgumentExecution {
     void respond(String message, Object... params);
 
     /**
-     * Sends a message to this execution's sender, formatting it according to given response format.
+     * Sends a response to this execution's sender with given arguments.
      *
-     * @param type   the message type to use for formatting
-     * @param params the arguments for the response format
+     * @param response  the response to use for formatting
+     * @param arguments the arguments for the response
+     * @see Response for details on how responses work
      */
-    void respond(Response type, Object... params);
+    void respond(Response response, Object... arguments);
+
+    /**
+     * Sends a formatted response to this execution's sender with given parameters.
+     *
+     * @param response   the formatted response to send
+     * @param message    the message to pass to the formatted response
+     * @param parameters the parameters for the response
+     * @see FormattedResponse#sendTo(CommandSender, Object...) for details on how formatted responses work and why this
+     * is a separate method
+     */
+    void respond(FormattedResponse response, String message, Object... parameters);
 
     /**
      * Sends a message to this execution's sender, first converting it to legacy text if the sender is
