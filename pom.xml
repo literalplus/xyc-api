@@ -82,6 +82,7 @@
         <ignoreSnapshots>true</ignoreSnapshots>
         <!-- JavaDoc footer -->
         <maven.build.timestamp.format>yyyy</maven.build.timestamp.format>
+        <doctitle>XYC ${project.version} JavaDocs</doctitle>
     </properties>
 
     <repositories>
@@ -200,7 +201,6 @@
                     <bottom><![CDATA[Copyright ${project.inceptionYear} - ${maven.build.timestamp} <a href="https://l1t.li/">Literallie<a> (Philipp Nowak).
                     Find the source code at <a href="https://github.com/xxyy/xyc-api/">GitHub</a>.]]></bottom>
                     <defaultAuthor><![CDATA[<a href="https://l1t.li/">probably Literallie</a>]]></defaultAuthor>
-                    <doctitle>XYC-API ${project.version} JavaDocs</doctitle>
                     <outputDirectory>${project.basedir}/target/apidocs</outputDirectory>
                     <quiet>true</quiet>
                     <tags>
