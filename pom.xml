@@ -131,6 +131,16 @@
                 <artifactId>xyc-api-minecraft</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>li.l1t.common</groupId>
+                <artifactId>xyc-api-spigot</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>li.l1t.common</groupId>
+                <artifactId>xyc-api-lanatus</artifactId>
+                <version>${project.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -193,6 +203,19 @@
                     <doctitle>XYC-API ${project.version} JavaDocs</doctitle>
                     <outputDirectory>${project.basedir}/target/apidocs</outputDirectory>
                     <quiet>true</quiet>
+                    <tags>
+                        <!-- The new JavaDoc tags used since JDK 1.8 are not official, so they aren't included in the javadoc tool by default -->
+                        <tag>
+                            <name>apiNote</name>
+                            <placement>a</placement>
+                            <head>API Note:</head>
+                        </tag>
+                        <tag>
+                            <name>implNote</name>
+                            <placement>a</placement>
+                            <head>Implementation Note:</head>
+                        </tag>
+                    </tags>
                 </configuration>
             </plugin>
 

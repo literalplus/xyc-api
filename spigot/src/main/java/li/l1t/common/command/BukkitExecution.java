@@ -68,7 +68,7 @@ public interface BukkitExecution extends ArgumentExecution {
      * @param startIndex the index of the first argument to process
      * @return the space-separated string of arguments passed to this execution, with {@link
      * net.md_5.bungee.api.ChatColor#translateAlternateColorCodes(char, String)} alternate color codes} replaced with
-     * '&'
+     * '&amp;'
      */
     String joinedArgsColored(int startIndex);
 
