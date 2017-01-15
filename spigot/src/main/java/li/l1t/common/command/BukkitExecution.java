@@ -24,7 +24,7 @@
 
 package li.l1t.common.command;
 
-import li.l1t.common.chat.ResponseFormat;
+import li.l1t.common.chat.Response;
 import li.l1t.common.util.CommandHelper;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
@@ -97,7 +97,7 @@ public interface BukkitExecution extends ArgumentExecution {
      * @param type   the message type to use for formatting
      * @param params the arguments for the response format
      */
-    void respond(ResponseFormat type, Object... params);
+    void respond(Response type, Object... params);
 
     /**
      * Sends a message to this execution's sender, first converting it to legacy text if the sender is

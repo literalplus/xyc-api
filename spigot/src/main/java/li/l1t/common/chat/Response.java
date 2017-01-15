@@ -41,7 +41,7 @@ import org.bukkit.command.CommandSender;
  * remaining arguments.</p>
  * @since 2017-01-14 / 4.4.0
  */
-public interface ResponseFormat {
+public interface Response {
     /**
      * Formats a message of this type with given arguments and returns the string representation of the result.
      *
