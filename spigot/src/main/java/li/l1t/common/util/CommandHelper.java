@@ -47,11 +47,11 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**
- * Provides several utility methods for commands, and some unrelated methods. This class has been historically evolving
- * since the initial release of XYC in 2013. Many methods have been removed in 2017, when it was moved to the public
- * XYC-API.
+ * Provides several utility methods for commands, and some unrelated methods.
  *
  * @author <a href="https://l1t.li/">Literallie</a>
+ * @apiNote This class has been historically evolving since the initial release of XYC in 2013. Many methods have been
+ * removed in 2017, when it was moved to the public XYC-API.
  * @since 4.4.0 / legacy XYC class dating back to 2013
  */
 public class CommandHelper {
