@@ -30,7 +30,7 @@ import org.bukkit.command.CommandSender;
 import java.util.Arrays;
 
 /**
- * A response that uses a generic format and allows to specify arbitrary string messages and arguments directly.
+ * A response that uses a generic format and allows to specify arbitrary string messages and parameters directly.
  *
  * @author <a href="https://l1t.li/">Literallie</a>
  * @since 2017-01-15 / 4.4.0
@@ -39,44 +39,43 @@ public interface FormattedResponse extends Response {
     /**
      * Formats a message of this type according to the format's template.
      *
-     * @param message   the message to format, with arguments represented like in {@link String#format(String,
-     *                  Object...)}
-     * @param arguments the arguments for the message
+     * @param message    the message to format, with parameters represented like in {@link String#format(String,
+     *                   Object...)}
+     * @param parameters the parameters for the message
      * @return the formatted message
      */
-    String format(String message, Object... arguments);
+    String format(String message, Object... parameters);
 
     /**
      * Formats a message of this type and sends the formatted message to a command sender.
      *
-     * @param sender    the receiver of the message
-     * @param message   the message to format
-     * @param arguments the arguments for the message
+     * @param sender     the receiver of the message
+     * @param message    the message to format
+     * @param parameters the parameters for the message
      * @see #format(String, Object...) for details on formatting
      */
-    void sendTo(CommandSender sender, String message, Object... arguments);
+    void sendTo(CommandSender sender, String message, Object... parameters);
 
     /**
      * Formats a message of this type and sends the formatted message to all players on given
      * server.
      *
-     * @param server    the server to get players from
-     * @param message   the message to format
-     * @param arguments the arguments for the message
+     * @param server     the server to get players from
+     * @param message    the message to format
+     * @param parameters the parameters for the message
      * @see #format(String, Object...) for details on formatting
      */
-    void broadcast(Server server, String message, Object... arguments);
+    void broadcast(Server server, String message, Object... parameters);
 
     /**
-     * {@inheritDoc}
-     * <p>Formats a list of {@link Response} arguments with this formatted response. This works by first
+     * {@inheritDoc} <p>Formats a list of {@link Response} arguments with this formatted response. This works by first
      * converting the first argument to a string and taking that as message pattern for {@link #format(String,
      * Object...)}. Then, the first argument from given arguments (that has been converted to a message pattern) is
-     * removed and the remaining arguments also passed to the format method. If given arguments are empty or null,
-     * an empty string and no arguments are passed to the format method.</p>
-     * <p><b>Note:</b> For {@link FormattedResponse} objects, prefer the more strict {@link #format(String, Object...)}
-     * method. That one provides type-checking for the first string argument, makes the intention clearer and avoids
-     * an unnecessary array copy.</p>
+     * removed and the remaining arguments also passed to the format method as parameters. If given arguments are empty
+     * or null, an empty string and no arguments are passed to the format method.</p> <p><b>Note:</b> For {@link
+     * FormattedResponse} objects, prefer the more strict {@link #format(String, Object...)} method. That one provides
+     * type-checking for the first string argument, makes the intention clearer and avoids an unnecessary array
+     * copy.</p>
      *
      * @param arguments {@inheritDoc}
      * @return {@inheritDoc}
