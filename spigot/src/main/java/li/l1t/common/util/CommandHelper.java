@@ -72,6 +72,53 @@ public class CommandHelper {
         Bukkit.getLogger().info("[XYC] Broadcast: " + msg);
     }
 
+
+    /**
+     * public static boolean checkActionPermAndMsg(CommandSender sender, String permission, String action) Checks for a
+     * permission and gives an appropriate message. (For actions,not commands)
+     *
+     * @param sender     CommandSender to check for permission and to send message to
+     * @param permission Permission to require
+     * @param action     Short description of the action that needs permission, shown to {@code sender} if permission
+     *                   check returns false.
+     * @return Whether {@code sender} had the permission required.
+     * @deprecated This method does not support internationalisation and encourages usage of returns for errors, where
+     * exceptions would make the code much more readable and result in less cyclomatic complexity. Use {@link
+     * BukkitExecution#requirePermission(String)}, {@link li.l1t.common.command.UserPermissionException}, or {@link
+     * CommandBehaviours#permissionChecking(String)} instead.
+     */
+    @Deprecated
+    public static boolean checkActionPermAndMsg(CommandSender sender, String permission, String action) {
+        if (sender.hasPermission(permission)) {
+            return true;
+        }
+        sender.sendMessage(String.format("§7Das darfst du nicht: §3%s §7(%s)", action, permission));
+        return false;
+    }
+
+    /**
+     * Checks for a permission and gives an appropriate message if it is assigned to {@code sender}.
+     *
+     * @param sender     CommandSender to check for permission and to send message to
+     * @param permission Permission to require
+     * @param label      Label of the command that needs permission, shown to {@code sender} if permission check returns
+     *                   false.
+     * @return whether sender has permission.
+     * @deprecated This method does not support internationalisation and encourages usage of returns for errors, where
+     * exceptions would make the code much more readable and result in less cyclomatic complexity. Use {@link
+     * BukkitExecution#requirePermission(String)}, {@link li.l1t.common.command.UserPermissionException}, or {@link
+     * CommandBehaviours#permissionChecking(String)} instead.
+     */
+    @Deprecated
+    public static boolean checkPermAndMsg(CommandSender sender, String permission, String label) {
+        if (sender.hasPermission(permission)) {
+            return true;
+        }
+        sender.sendMessage(String.format("§7Diesen Befehl darfst du nicht verwenden: §3%s §7(%s)", label, permission));
+        return false;
+    }
+
+
     /**
      * Comma separates a Collection's contents' String representations. This is the same as calling {@link
      * CommandHelper#CSCollection(Iterable, String)} with "{empty}" as default.
@@ -168,8 +215,9 @@ public class CommandHelper {
      * corresponding objects.
      *
      * @return A List of all online Players' names.
-     * @see Bukkit#getOnlinePlayers()
+     * @deprecated Use Streams.
      */
+    @Deprecated
     public static List<String> getOnlinePlayerNames() {
         final List<String> rtrn = new ArrayList<>();
         for (final Player plr : Bukkit.getOnlinePlayers()) {
