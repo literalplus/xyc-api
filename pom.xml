@@ -27,7 +27,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>li.l1t.common</groupId>
-    <artifactId>xyc-api-parent</artifactId>
+    <artifactId>xyc-api-1.8-parent</artifactId>
     <version>4.4.1-SNAPSHOT</version>
     <modules>
         <module>api</module>
@@ -42,7 +42,7 @@
         The public XYC API provides some interfaces and simple classes which are common to multiple projects.
         This is the parent pom for all modules of the API. Some parts contain a complete implementation,
         while for others, only the API is provided. It is generally intended to be used with Minecraft
-        servers, but may also be applicable for other use cases.
+        servers, but may also be applicable for other use cases. This project is built for Minecraft 1.8 support.
     </description>
     <inceptionYear>2013</inceptionYear>
 
@@ -54,11 +54,11 @@
 
     <ciManagement>
         <system>jenkins</system>
-        <url>https://ci.l1t.li/job/public~xyc-api/</url>
+        <url>https://ci.l1t.li/job/public~xyc-api-1.8/</url>
     </ciManagement>
 
     <distributionManagement>
-        <downloadUrl>https://ci.l1t.li/job/public~xyc-api/</downloadUrl>
+        <downloadUrl>https://ci.l1t.li/job/public~xyc-api-1.8/</downloadUrl>
         <repository>
             <id>xxyy-repo</id>
             <url>https://repo.l1t.li/xxyy-public/</url>
@@ -70,8 +70,8 @@
         <!-- The Guava version has been synced to BungeeCord's dependency at the beginning of 2017.
               Check which version they are using before changing this. -->
         <guava.version>18.0</guava.version>
-        <minecraft.version>1.11</minecraft.version>
-        <spigot.version>${minecraft.version}.1-R0.1-SNAPSHOT</spigot.version>
+        <minecraft.version>1.8</minecraft.version>
+        <spigot.version>${minecraft.version}.8-R0.1-SNAPSHOT</spigot.version>
         <bungee.version>${minecraft.version}-SNAPSHOT</bungee.version>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -81,7 +81,7 @@
         <ignoreSnapshots>true</ignoreSnapshots>
         <!-- JavaDoc footer -->
         <maven.build.timestamp.format>yyyy</maven.build.timestamp.format>
-        <doctitle>XYC ${project.version} JavaDocs</doctitle>
+        <doctitle>XYC-1.8 ${project.version} JavaDocs</doctitle>
     </properties>
 
     <repositories>
@@ -123,22 +123,22 @@
 
             <dependency>
                 <groupId>li.l1t.common</groupId>
-                <artifactId>xyc-api</artifactId>
+                <artifactId>xyc-api-1.8</artifactId>
                 <version>4.4.1-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>li.l1t.common</groupId>
-                <artifactId>xyc-api-minecraft</artifactId>
+                <artifactId>xyc-api-1.8-minecraft</artifactId>
                 <version>4.4.1-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>li.l1t.common</groupId>
-                <artifactId>xyc-api-spigot</artifactId>
+                <artifactId>xyc-api-1.8-spigot</artifactId>
                 <version>4.4.1-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>li.l1t.common</groupId>
-                <artifactId>xyc-api-lanatus</artifactId>
+                <artifactId>xyc-api-1.8-lanatus</artifactId>
                 <version>4.4.1-SNAPSHOT</version>
             </dependency>
         </dependencies>
@@ -198,7 +198,7 @@
                 <configuration>
                     <excludePackageNames>*.internal.*</excludePackageNames>
                     <bottom><![CDATA[Copyright ${project.inceptionYear} - ${maven.build.timestamp} <a href="https://l1t.li/">Literallie<a> (Philipp Nowak).
-                    Find the source code at <a href="https://github.com/xxyy/xyc-api/">GitHub</a>.]]></bottom>
+                    Find the source code at <a href="https://github.com/xxyy/xyc-api/tree/mc-1.8/">GitHub</a>.]]></bottom>
                     <defaultAuthor><![CDATA[<a href="https://l1t.li/">probably Literallie</a>]]></defaultAuthor>
                     <outputDirectory>${project.basedir}/target/apidocs</outputDirectory>
                     <quiet>true</quiet>

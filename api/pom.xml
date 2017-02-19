@@ -26,14 +26,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <artifactId>xyc-api-parent</artifactId>
+        <artifactId>xyc-api-1.8-parent</artifactId>
         <groupId>li.l1t.common</groupId>
         <version>4.4.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>xyc-api</artifactId>
+    <artifactId>xyc-api-1.8</artifactId>
 
-    <name>XYC-API API</name>
+    <name>XYC-API 1.8 API</name>
     <description>
         The public XYC API provides some interfaces and simple classes which are common to multiple projects.
         This module contains platform-independent general-purpose code. Some parts contain a complete

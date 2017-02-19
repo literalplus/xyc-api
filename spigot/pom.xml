@@ -26,14 +26,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <artifactId>xyc-api-parent</artifactId>
+        <artifactId>xyc-api-1.8-parent</artifactId>
         <groupId>li.l1t.common</groupId>
         <version>4.4.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>xyc-api-spigot</artifactId>
+    <artifactId>xyc-api-1.8-spigot</artifactId>
 
-    <name>XYC-API Spigot</name>
+    <name>XYC-API 1.8 Spigot</name>
     <description>
         The public XYC API provides some interfaces and simple classes which are common to multiple projects.
         This module contains code specific to the Spigot Minecraft server implementation. Some parts contain
@@ -47,7 +47,7 @@
         </dependency>
         <dependency>
             <groupId>li.l1t.common</groupId>
-            <artifactId>xyc-api-minecraft</artifactId>
+            <artifactId>xyc-api-1.8-minecraft</artifactId>
         </dependency>
     </dependencies>
 </project>
