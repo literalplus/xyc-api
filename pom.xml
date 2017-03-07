@@ -28,7 +28,7 @@
 
     <groupId>li.l1t.common</groupId>
     <artifactId>xyc-api-1.8-parent</artifactId>
-    <version>4.4.2</version>
+    <version>4.4.3-SNAPSHOT</version>
     <modules>
         <module>api</module>
         <module>minecraft</module>
@@ -124,22 +124,22 @@
             <dependency>
                 <groupId>li.l1t.common</groupId>
                 <artifactId>xyc-api-1.8</artifactId>
-                <version>4.4.2</version>
+                <version>4.4.3-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>li.l1t.common</groupId>
                 <artifactId>xyc-api-1.8-minecraft</artifactId>
-                <version>4.4.2</version>
+                <version>4.4.3-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>li.l1t.common</groupId>
                 <artifactId>xyc-api-1.8-spigot</artifactId>
-                <version>4.4.2</version>
+                <version>4.4.3-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>li.l1t.common</groupId>
                 <artifactId>xyc-api-1.8-lanatus</artifactId>
-                <version>4.4.2</version>
+                <version>4.4.3-SNAPSHOT</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
