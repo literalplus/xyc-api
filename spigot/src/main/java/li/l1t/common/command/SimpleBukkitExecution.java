@@ -27,6 +27,8 @@ package li.l1t.common.command;
 import com.google.common.base.Preconditions;
 import li.l1t.common.chat.*;
 import li.l1t.common.exception.UserException;
+import li.l1t.common.string.Args;
+import li.l1t.common.string.ArgumentFormatException;
 import li.l1t.common.util.CommandHelper;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.BaseComponent;
@@ -36,10 +38,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Stream;
 
 /**
  * A simple implementation of a {@link BukkitExecution}, holding metadata about a command
@@ -48,17 +47,16 @@ import java.util.stream.Stream;
  * @author <a href="https://l1t.li/">Literallie</a>
  * @since 2016-10-26 / 4.4.0
  */
-public class SimpleBukkitExecution implements BukkitExecution {
+public class SimpleBukkitExecution extends Args implements BukkitExecution {
     private final CommandSender sender;
     private final Command command;
     private final String label;
-    private final String[] args;
 
     public SimpleBukkitExecution(CommandSender sender, Command command, String label, String[] args) {
+        super(args);
         this.sender = Preconditions.checkNotNull(sender, "sender");
         this.command = Preconditions.checkNotNull(command, "command");
         this.label = Preconditions.checkNotNull(label, "label");
-        this.args = Preconditions.checkNotNull(args, "args");
     }
 
     @Override
@@ -74,65 +72,6 @@ public class SimpleBukkitExecution implements BukkitExecution {
     @Override
     public String senderName() {
         return sender.getName();
-    }
-
-    @Override
-    public String[] args() {
-        return args;
-    }
-
-    @Override
-    public List<String> argsList() {
-        return Arrays.asList(args);
-    }
-
-    @Override
-    public Stream<String> argsStream() {
-        return Arrays.stream(args);
-    }
-
-    @Override
-    public String arg(int index) {
-        if (!hasArg(index)) {
-            throw MissingArgumentException.forIndex(index);
-        }
-        return args[index];
-    }
-
-    @Override
-    public int intArg(int index) {
-        try {
-            return Integer.parseInt(arg(index));
-        } catch (NumberFormatException e) {
-            throw new UserException("Argument %d: Das ist keine Zahl: '%s'", index + 1, arg(index));
-        }
-    }
-
-    @Override
-    public UUID uuidArg(int index) {
-        try {
-            return UUID.fromString(arg(index));
-        } catch (IllegalArgumentException e) {
-            throw new UserException(
-                    "Argument %d: Das ist keine UUID: '%s'. Eine valide UUID ist zum Beispiel '%s'.",
-                    index + 1, arg(index), UUID.randomUUID()
-            );
-        }
-    }
-
-    @Override
-    public Optional<String> findArg(int index) {
-        return hasArg(index) ? Optional.of(arg(index)) : Optional.empty();
-    }
-
-    @Override
-    public boolean hasArg(int index) {
-        return args.length > index;
-    }
-
-    @Override
-    public boolean hasNoArgs() {
-        return args.length == 0;
     }
 
     @Override
@@ -224,5 +163,34 @@ public class SimpleBukkitExecution implements BukkitExecution {
     public boolean hasPermission(String permission) {
         Preconditions.checkNotNull(permission, "permission");
         return sender.hasPermission(permission);
+    }
+
+    @Override
+    public int intArg(int index) {
+        try {
+            return super.intArg(index);
+        } catch (ArgumentFormatException e) {
+            throw new UserException("Argument %d: Das ist keine Zahl: '%s'", e.getIndex() + 1, e.getActual());
+        }
+    }
+
+    @Override
+    public UUID uuidArg(int index) {
+        try {
+            return super.uuidArg(index);
+        } catch (ArgumentFormatException e) {
+            throw new UserException("Argument %d: Das ist keine valide UUID: '%s' " +
+                    "(Eine valide UUID ist zum Beispiel: %s)", e.getIndex() + 1, e.getActual(), UUID.randomUUID());
+        }
+    }
+
+    @Override
+    public <E extends Enum<E>> E enumArg(Class<E> enumType, int index) {
+        try {
+            return super.enumArg(enumType, index);
+        } catch (ArgumentFormatException e) {
+            throw new UserException("Argument %d: Muss eines von %s sein (war %s)",
+                    index, Arrays.toString(enumType.getEnumConstants()), arg(index));
+        }
     }
 }

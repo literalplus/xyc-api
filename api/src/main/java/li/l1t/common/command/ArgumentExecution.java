@@ -24,6 +24,8 @@
 
 package li.l1t.common.command;
 
+import li.l1t.common.string.ArgumentFormatException;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -100,4 +102,17 @@ public interface ArgumentExecution {
      * @throws MissingArgumentException if there is no argument at given start index
      */
     String joinedArgs(int startIndex);
+
+    /**
+     * Attempts to match an enum argument on a best-effort basis. This converts the string to
+     * uppercase and replaces spaces and dashes with underscores, expecting the enum to follow
+     * standard Java naming conventions.
+     *
+     * @param enumType the enum class to search in
+     * @param index    the index of the argument to use
+     * @param <E>      the enum type
+     * @return the enum type
+     * @throws ArgumentFormatException if the enum does not contain such constant
+     */
+    <E extends Enum<E>> E enumArg(Class<E> enumType, int index);
 }
