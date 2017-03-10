@@ -134,4 +134,28 @@ public class Args {
     public boolean hasNoArgs() {
         return args.length == 0;
     }
+
+    /**
+     * Provides a copy of given range in these arguments.
+     *
+     * @param startIndexInclusive the first argument to be included
+     * @param endIndexExclusive   the first argument to be excluded
+     * @return an Args object for given range
+     * @see Arrays#copyOfRange(Object[], int, int)
+     */
+    public Args argRange(int startIndexInclusive, int endIndexExclusive) {
+        return new Args(Arrays.copyOfRange(args, startIndexInclusive, endIndexExclusive));
+    }
+
+    /**
+     * Provides a copy of these arguments, starting at a given argument
+     *
+     * @param startIndexInclusive the first argument to be included
+     * @return an Args object for given range
+     * @see Arrays#copyOfRange(Object[], int, int)
+     */
+    public Args argRangeFrom(int startIndexInclusive) {
+        return new Args(Arrays.copyOfRange(args, startIndexInclusive, args.length));
+    }
+
 }
