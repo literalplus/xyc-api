@@ -28,7 +28,7 @@
     <parent>
         <artifactId>xyc-api-1.8-parent</artifactId>
         <groupId>li.l1t.common</groupId>
-        <version>4.4.7</version>
+        <version>4.4.8-SNAPSHOT</version>
     </parent>
 
     <artifactId>xyc-api-1.8-lanatus</artifactId>
