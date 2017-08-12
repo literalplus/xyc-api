@@ -22,10 +22,35 @@
  * SOFTWARE.
  */
 
+/*
+ * MIT License
+ *
+ * Copyright (c) 2016-2017 Philipp Nowak (Literallie)
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
 package li.l1t.common.string;
 
 import com.google.common.base.Preconditions;
 import li.l1t.common.command.MissingArgumentException;
+import li.l1t.common.i18n.Message;
 
 import java.util.Arrays;
 import java.util.List;
@@ -80,7 +105,7 @@ public class Args {
         try {
             return Integer.parseInt(arg(index));
         } catch (NumberFormatException e) {
-            throw new ArgumentFormatException(arg(index), index, "number", e);
+            throw new ArgumentFormatException(arg(index), index, Message.of("x!api!number"), e);
         }
     }
 
@@ -88,7 +113,7 @@ public class Args {
         try {
             return Double.parseDouble(arg(index));
         } catch (NumberFormatException e) {
-            throw new ArgumentFormatException(arg(index), index, "decimal", e);
+            throw new ArgumentFormatException(arg(index), index, Message.of("x!api!decimal"), e);
         }
     }
 
@@ -111,7 +136,7 @@ public class Args {
         } catch (IllegalArgumentException e) {
             E[] enumConstants = enumType.getEnumConstants();
             String enumConstantsString = Arrays.toString(enumConstants);
-            throw new ArgumentFormatException(arg(index), index, "one of " + enumConstantsString, e);
+            throw new ArgumentFormatException(arg(index), index, Message.of("x!api!enum-of", enumConstantsString), e);
         }
     }
 
@@ -119,7 +144,7 @@ public class Args {
         try {
             return UUID.fromString(arg(index));
         } catch (IllegalArgumentException e) {
-            throw new ArgumentFormatException(arg(index), index, "a valid UUID (example: " + UUID.randomUUID() + ")", e);
+            throw new ArgumentFormatException(arg(index), index, Message.of("x!api!uuid", UUID.randomUUID()), e);
         }
     }
 
