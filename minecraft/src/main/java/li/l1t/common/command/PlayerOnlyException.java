@@ -24,30 +24,21 @@
 
 package li.l1t.common.command;
 
-import com.google.common.base.Preconditions;
 import li.l1t.common.exception.UserException;
-import org.bukkit.permissions.Permissible;
+import li.l1t.common.i18n.Message;
 
 /**
- * Thrown if the executor of a command does not have permission for something.
+ * Thrown if a command may only be executed by players but the sender is not a player.
  *
  * @author <a href="https://l1t.li/">Literallie</a>
  * @since 2016-10-25
  */
-public class UserPermissionException extends UserException {
-    public UserPermissionException(String messagePattern, Object... params) {
+public class PlayerOnlyException extends UserException {
+    public PlayerOnlyException() {
+        super(Message.of("x!mc!error.player-only"));
+    }
+
+    public PlayerOnlyException(String messagePattern, Object... params) {
         super(messagePattern, params);
-    }
-
-    public static void checkPermission(Permissible target, String permission, String messagePattern, Object... params) {
-        Preconditions.checkNotNull(target, "target");
-        Preconditions.checkNotNull(permission, "permission");
-        if (!target.hasPermission(permission)) {
-            throw new UserPermissionException(messagePattern, params);
-        }
-    }
-
-    public static void checkPermission(Permissible target, String permission) {
-        checkPermission(target, permission, "Du bist nicht autorisiert, dies zu tun. (%s)", permission);
     }
 }

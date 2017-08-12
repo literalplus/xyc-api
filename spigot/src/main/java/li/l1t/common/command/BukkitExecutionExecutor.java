@@ -24,13 +24,15 @@
 
 package li.l1t.common.command;
 
+import li.l1t.common.exception.NonSensitiveException;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
 /**
- * Abstract base class for execution executors which get notified of executions via the Bukkit
- * {@link CommandExecutor} API.
+ * Abstract base class for execution executors which get notified of executions via the Bukkit {@link CommandExecutor}
+ * API. Catches {@link NonSensitiveException}s and prints their {@link NonSensitiveException#getColoredI18nMessage()
+ * colored messages}.
  *
  * @author <a href="https://l1t.li/">Literallie</a>
  * @since 2016-10-26 / 4.4.0
@@ -38,6 +40,15 @@ import org.bukkit.command.CommandSender;
 public abstract class BukkitExecutionExecutor implements ExecutionExecutor, CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        return execute(new SimpleBukkitExecution(sender, command, label, args));
+        SimpleBukkitExecution exec = new SimpleBukkitExecution(sender, command, label, args);
+        try {
+            return execute(exec);
+        } catch (NonSensitiveException e) {
+            if (e.needsLogging()) {
+                e.printStackTrace();
+            }
+            exec.respond(e.getColoredI18nMessage());
+            return true;
+        }
     }
 }

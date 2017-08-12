@@ -24,26 +24,17 @@
 
 package li.l1t.common.command;
 
-import com.google.common.base.Preconditions;
 import li.l1t.common.exception.UserException;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
+import li.l1t.common.i18n.Message;
 
 /**
- * Thrown if a command may only be executed by players but the sender is not a player.
+ * Thrown if the executor of a command does not have permission for something.
  *
  * @author <a href="https://l1t.li/">Literallie</a>
  * @since 2016-10-25
  */
-public class PlayerOnlyException extends UserException {
-    public PlayerOnlyException(String messagePattern, Object... params) {
-        super(messagePattern, params);
-    }
-
-    public static void checkIsPlayer(CommandSender target, String details, Object... params) {
-        Preconditions.checkNotNull(target, "target");
-        if (!(target instanceof Player)) {
-            throw new PlayerOnlyException("Dieser Befehl kann nur von Spielern verwendet werden. " + details, params);
-        }
+public class UserPermissionException extends UserException {
+    public UserPermissionException(String permission) {
+        super(Message.of("x!mc!error.permission", permission));
     }
 }

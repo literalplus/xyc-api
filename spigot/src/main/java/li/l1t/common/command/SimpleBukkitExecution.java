@@ -25,38 +25,33 @@
 package li.l1t.common.command;
 
 import com.google.common.base.Preconditions;
-import li.l1t.common.chat.*;
-import li.l1t.common.exception.UserException;
-import li.l1t.common.string.Args;
-import li.l1t.common.string.ArgumentFormatException;
+import li.l1t.common.chat.ComponentSender;
+import li.l1t.common.chat.FormattedResponse;
+import li.l1t.common.chat.Response;
+import li.l1t.common.i18n.MinecraftLocale;
 import li.l1t.common.util.CommandHelper;
-import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.BaseComponent;
-import net.md_5.bungee.api.chat.ComponentBuilder;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.util.Arrays;
+import java.util.Locale;
 import java.util.UUID;
 
 /**
- * A simple implementation of a {@link BukkitExecution}, holding metadata about a command
- * execution.
+ * A simple implementation of a {@link BukkitExecution}, holding metadata about a command execution.
  *
  * @author <a href="https://l1t.li/">Literallie</a>
  * @since 2016-10-26 / 4.4.0
  */
-public class SimpleBukkitExecution extends Args implements BukkitExecution {
+public class SimpleBukkitExecution extends AbstractCommandExecution implements BukkitExecution {
     private final CommandSender sender;
     private final Command command;
-    private final String label;
 
     public SimpleBukkitExecution(CommandSender sender, Command command, String label, String[] args) {
-        super(args);
+        super(label, args);
         this.sender = Preconditions.checkNotNull(sender, "sender");
         this.command = Preconditions.checkNotNull(command, "command");
-        this.label = Preconditions.checkNotNull(label, "label");
     }
 
     @Override
@@ -75,23 +70,17 @@ public class SimpleBukkitExecution extends Args implements BukkitExecution {
     }
 
     @Override
-    public String joinedArgs(int startIndex) {
-        return Arguments.joinRange(args(), startIndex, 0);
-    }
-
-    @Override
-    public String joinedArgsColored(int startIndex) {
-        return Arguments.joinRangeColored(args(), startIndex, 0);
+    public Locale locale() {
+        if (sender instanceof Player) {
+            return MinecraftLocale.toJava(((Player) sender).spigot().getLocale());
+        } else {
+            return Locale.ENGLISH;
+        }
     }
 
     @Override
     public Command command() {
         return command;
-    }
-
-    @Override
-    public String label() {
-        return label;
     }
 
     @Override
@@ -118,34 +107,8 @@ public class SimpleBukkitExecution extends Args implements BukkitExecution {
     }
 
     @Override
-    public void respond(ComponentBuilder messageBuilder) {
-        ComponentSender.sendTo(messageBuilder, sender);
-    }
-
-    @Override
-    public void respondUsage(String subCommand, String arguments, String description) {
-        String commandLine = formatCommandLineForSub(subCommand);
-        respond(
-                new XyComponentBuilder(commandLine, ChatColor.YELLOW)
-                        .suggest(commandLine)
-                        .tooltip("§eKlicken zum Kopieren:\n" + commandLine)
-                        .appendIf(!arguments.isEmpty(), " " + arguments)
-                        .append(" ", ComponentBuilder.FormatRetention.NONE)
-                        .append(description, ChatColor.GOLD)
-        );
-    }
-
-    private String formatCommandLineForSub(String subCommand) {
-        if (subCommand.isEmpty()) {
-            return "/" + label();
-        } else {
-            return "/" + label() + " " + subCommand;
-        }
-    }
-
-    @Override
-    public void requireIsPlayer() throws PlayerOnlyException {
-        PlayerOnlyException.checkIsPlayer(sender(), "/%s %s", label, joinedArgs(0));
+    public boolean isPlayer() {
+        return sender instanceof Player;
     }
 
     @Override
@@ -155,42 +118,8 @@ public class SimpleBukkitExecution extends Args implements BukkitExecution {
     }
 
     @Override
-    public void requirePermission(String permission) throws UserPermissionException {
-        UserPermissionException.checkPermission(sender(), permission);
-    }
-
-    @Override
     public boolean hasPermission(String permission) {
         Preconditions.checkNotNull(permission, "permission");
         return sender.hasPermission(permission);
-    }
-
-    @Override
-    public int intArg(int index) {
-        try {
-            return super.intArg(index);
-        } catch (ArgumentFormatException e) {
-            throw new UserException("Argument %d: Das ist keine Zahl: '%s'", e.getIndex() + 1, e.getActual());
-        }
-    }
-
-    @Override
-    public UUID uuidArg(int index) {
-        try {
-            return super.uuidArg(index);
-        } catch (ArgumentFormatException e) {
-            throw new UserException("Argument %d: Das ist keine valide UUID: '%s' " +
-                    "(Eine valide UUID ist zum Beispiel: %s)", e.getIndex() + 1, e.getActual(), UUID.randomUUID());
-        }
-    }
-
-    @Override
-    public <E extends Enum<E>> E enumArg(Class<E> enumType, int index) {
-        try {
-            return super.enumArg(enumType, index);
-        } catch (ArgumentFormatException e) {
-            throw new UserException("Argument %d: Muss eines von %s sein (war %s)",
-                    index, Arrays.toString(enumType.getEnumConstants()), arg(index));
-        }
     }
 }
