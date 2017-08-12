@@ -30,7 +30,9 @@ import java.text.MessageFormat;
 import java.util.*;
 
 /**
- * Provides static utilities for Internationalisation of XYC messages.
+ * Provides static utilities for Internationalisation of XYC messages. <p><b>Note:</b> To use this, you need to first
+ * {@link #registerBundles(String, BundleCache) register your bundle cache}. Read that method's JavaDoc for further
+ * things to note.</p>
  *
  * @author <a href="https://l1t.li/">Literallie</a>
  * @since 2017-08-12 / 4.5.0
