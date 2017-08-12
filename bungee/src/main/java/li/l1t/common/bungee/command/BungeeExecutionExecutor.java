@@ -22,41 +22,36 @@
  * SOFTWARE.
  */
 
-package li.l1t.common.command;
+package li.l1t.common.bungee.command;
 
+import li.l1t.common.command.ExecutionExecutor;
 import li.l1t.common.exception.NonSensitiveException;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
-import org.bukkit.command.PluginIdentifiableCommand;
-import org.bukkit.plugin.Plugin;
-
-import java.util.logging.Level;
+import net.md_5.bungee.api.CommandSender;
+import net.md_5.bungee.api.plugin.Command;
 
 /**
- * Abstract base class for execution executors which get notified of executions via the Bukkit {@link CommandExecutor}
- * API. Catches {@link NonSensitiveException}s and prints their {@link NonSensitiveException#getColoredI18nMessage()
- * colored messages}.
+ * Abstract base class for execution executors which get notified of executions via the BungeeCord {@link Command} API.
+ * Catches {@link NonSensitiveException}s and prints their {@link NonSensitiveException#getColoredI18nMessage() colored
+ * messages}.
  *
  * @author <a href="https://l1t.li/">Literallie</a>
- * @since 2016-10-26 / 4.4.0
+ * @since 2017-08-12 / 4.5.0
  */
-public abstract class BukkitExecutionExecutor implements ExecutionExecutor<BukkitExecution>, CommandExecutor {
+public abstract class BungeeExecutionExecutor extends Command implements ExecutionExecutor<BungeeExecution> {
+    public BungeeExecutionExecutor(String name, String permission, String... aliases) {
+        super(name, permission, aliases);
+    }
+
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        SimpleBukkitExecution exec = new SimpleBukkitExecution(sender, command, label, args);
+    public void execute(CommandSender sender, String[] args) {
+        SimpleBungeeExecution exec = new SimpleBungeeExecution(sender, this, getName(), args);
         try {
             execute(exec);
         } catch (NonSensitiveException e) {
             if (e.needsLogging()) {
-                if (command instanceof PluginIdentifiableCommand) {
-                    Plugin plugin = ((PluginIdentifiableCommand) command).getPlugin();
-                    plugin.getLogger().log(Level.WARNING, "Exception executing /" + exec.joinedArgs(0) + ":", e);
-                }
                 e.printStackTrace();
             }
             exec.respond(e.getColoredI18nMessage());
         }
-        return true;
     }
 }

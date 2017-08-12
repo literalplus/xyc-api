@@ -32,6 +32,7 @@ package li.l1t.common.util;
 import com.google.common.base.Preconditions;
 import li.l1t.common.command.BukkitExecution;
 import li.l1t.common.command.PlayerOnlyException;
+import li.l1t.common.command.UserPermissionException;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
@@ -83,7 +84,7 @@ public class CommandHelper {
      * @return Whether {@code sender} had the permission required.
      * @deprecated This method does not support internationalisation and encourages usage of returns for errors, where
      * exceptions would make the code much more readable and result in less cyclomatic complexity. Use {@link
-     * BukkitExecution#requirePermission(String)}, or {@link li.l1t.common.command.UserPermissionException} instead.
+     * BukkitExecution#requirePermission(String)}, or {@link UserPermissionException} instead.
      */
     @Deprecated
     public static boolean checkActionPermAndMsg(CommandSender sender, String permission, String action) {
@@ -104,7 +105,7 @@ public class CommandHelper {
      * @return whether sender has permission.
      * @deprecated This method does not support internationalisation and encourages usage of returns for errors, where
      * exceptions would make the code much more readable and result in less cyclomatic complexity. Use {@link
-     * BukkitExecution#requirePermission(String)}, or {@link li.l1t.common.command.UserPermissionException} instead.
+     * BukkitExecution#requirePermission(String)}, or {@link UserPermissionException} instead.
      */
     @Deprecated
     public static boolean checkPermAndMsg(CommandSender sender, String permission, String label) {

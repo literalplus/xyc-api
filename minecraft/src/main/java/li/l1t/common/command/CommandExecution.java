@@ -26,6 +26,8 @@ package li.l1t.common.command;
 
 import li.l1t.common.exception.NonSensitiveException;
 import li.l1t.common.i18n.Message;
+import li.l1t.common.i18n.XycI18n;
+import li.l1t.common.util.UUIDHelper;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 
@@ -36,7 +38,7 @@ import java.util.UUID;
  * Stores basic information about an individual execution of a Minecraft command and provides methods for convenient
  * access of these. Check your platform XYC package for a platform-specific implementation of this.
  *
- * <p><b>Note:</b> To correctly display error messages, a catch block for {@link li.l1t.common.exception.NonSensitiveException}
+ * <p><b>Note:</b> To correctly display error messages, a catch block for {@link NonSensitiveException}
  * is recommended in your command implementation. See {@link NonSensitiveException#getColoredI18nMessage()} for a
  * formatted message.</p>
  *
@@ -46,7 +48,7 @@ import java.util.UUID;
 public interface CommandExecution extends ArgumentExecution {
     /**
      * The unique id associated with the command sender by the Minecraft server. If there is no unique id assigned to
-     * the sender, e.g. for console commands, {@link li.l1t.common.util.UUIDHelper#NIL_UUID} is returned.
+     * the sender, e.g. for console commands, {@link UUIDHelper#NIL_UUID} is returned.
      *
      * @return a unique id representing the command sender
      */
@@ -100,7 +102,7 @@ public interface CommandExecution extends ArgumentExecution {
 
     /**
      * Sends a message to this execution's sender in their chosen client locale. This translates the message using
-     * {@link li.l1t.common.i18n.XycI18n#getMessage(Locale, Message)}.
+     * {@link XycI18n#getMessage(Locale, Message)}.
      *
      * @param message the message to send
      */

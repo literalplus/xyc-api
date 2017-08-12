@@ -28,20 +28,18 @@ import li.l1t.common.exception.InternalException;
 import li.l1t.common.exception.UserException;
 
 /**
- * Something that executes commands specified by {@link BukkitExecution} instances.
+ * Something that executes commands specified by {@link CommandExecution} instance.
  *
  * @author <a href="https://l1t.li/">Literallie</a>
- * @since 2016-10-26
+ * @since 2017-08-12 / 4.5.0
  */
-public interface ExecutionExecutor {
+public interface ExecutionExecutor<E extends CommandExecution> {
     /**
      * Executes the command specified by given execution.
      *
      * @param exec the execution to process
-     * @return whether the execution was "successful". An error message may be shown by the caller if the execution was
-     * unsuccessful.
      * @throws UserException     if incorrect user input led to an error
      * @throws InternalException if internal system conditions led to an error
      */
-    boolean execute(BukkitExecution exec) throws UserException, InternalException;
+    void execute(E exec) throws UserException, InternalException;
 }
