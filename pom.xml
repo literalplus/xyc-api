@@ -28,7 +28,7 @@
 
     <groupId>li.l1t.common</groupId>
     <artifactId>xyc-api-parent</artifactId>
-    <version>4.5.1-SNAPSHOT</version>
+    <version>4.5.1</version>
     <modules>
         <module>api</module>
         <module>minecraft</module>
@@ -51,7 +51,7 @@
         <connection>scm:git:git@github.com:xxyy/xyc-api.git</connection>
         <developerConnection>scm:git:git@github.com:xxyy/xyc-api.git</developerConnection>
         <url>https://github.com/xxyy/xyc-api/</url>
-      <tag>HEAD</tag>
+      <tag>xyc-api-parent-4.5.1</tag>
   </scm>
 
     <ciManagement>
@@ -131,22 +131,22 @@
             <dependency>
                 <groupId>li.l1t.common</groupId>
                 <artifactId>xyc-api</artifactId>
-                <version>4.5.1-SNAPSHOT</version>
+                <version>4.5.1</version>
             </dependency>
             <dependency>
                 <groupId>li.l1t.common</groupId>
                 <artifactId>xyc-api-minecraft</artifactId>
-                <version>4.5.1-SNAPSHOT</version>
+                <version>4.5.1</version>
             </dependency>
             <dependency>
                 <groupId>li.l1t.common</groupId>
                 <artifactId>xyc-api-spigot</artifactId>
-                <version>4.5.1-SNAPSHOT</version>
+                <version>4.5.1</version>
             </dependency>
             <dependency>
                 <groupId>li.l1t.common</groupId>
                 <artifactId>xyc-api-lanatus</artifactId>
-                <version>4.5.1-SNAPSHOT</version>
+                <version>4.5.1</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
