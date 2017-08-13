@@ -66,11 +66,11 @@ public class MessagePath {
 
     public static MessagePath of(String path) {
         String[] parts = path.split("!");
-        if (parts.length != 3 || parts[1].isEmpty() || parts[0].isEmpty()) {
+        if (parts.length != 3 || parts[2].isEmpty() || parts[1].isEmpty()) {
             throw new IllegalArgumentException(String.format("Malformed message path: '%s'", path));
         }
-        String packageName = packageShorthands.getOrDefault(parts[2], parts[2]);
-        return new MessagePath(parts[2], packageName + "." + parts[0], parts[1]);
+        String packageName = packageShorthands.getOrDefault(parts[0], parts[0]);
+        return new MessagePath(parts[0], packageName + "." + parts[0], parts[1]);
     }
 
     public String packageKey() {
