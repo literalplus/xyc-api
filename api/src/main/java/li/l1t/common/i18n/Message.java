@@ -27,9 +27,9 @@ package li.l1t.common.i18n;
 import java.util.Arrays;
 
 /**
- * Represents a message that may be translatable or static.
- * <p><b>Note:</b> It is advised that all methods accepting message objects also provide an overload that
- * accepts translation key and arguments, where readability allows, to reduce clutter in code.</p>
+ * Represents a message that may be translatable or static. <p><b>Note:</b> It is advised that all methods accepting
+ * message objects also provide an overload that accepts translation key and arguments, where readability allows, to
+ * reduce clutter in code.</p>
  *
  * @author <a href="https://l1t.li/">Literallie</a>
  * @since 2017-03-04
@@ -92,11 +92,10 @@ public class Message {
     }
 
     /**
-     * Returns a string representation of this message.<p>For {@link #isStatic() static messages}, this is
-     * the static text, literally.</p>
-     * <p>For dynamic messages with no arguments, this is the {@link #getKey() translation key}.</p>
-     * <p>For dynamic messages with arguments, this is the {@link #getKey() translation key}, with the
-     * {@link Arrays#toString(Object[]) string representation of the arguments} attached directly without a space.</p>
+     * Returns a string representation of this message.<p>For {@link #isStatic() static messages}, this is the static
+     * text, literally.</p> <p>For dynamic messages with no arguments, this is the {@link #getKey() translation
+     * key}.</p> <p>For dynamic messages with arguments, this is the {@link #getKey() translation key}, with the {@link
+     * Arrays#toString(Object[]) string representation of the arguments} attached directly without a space.</p>
      *
      * @return a string representation of this message
      */
@@ -130,5 +129,16 @@ public class Message {
      */
     public static Message ofText(String staticText) {
         return new Message(staticText, null);
+    }
+
+    /**
+     * Creates a new static message.
+     *
+     * @param staticText the static message text, with {@link String#format(String, Object...)}-like parameter escapes
+     * @param params     the parameters to add to the message
+     * @return the created message
+     */
+    public static Message ofText(String staticText, Object... params) {
+        return new Message(String.format(staticText, params), null);
     }
 }
