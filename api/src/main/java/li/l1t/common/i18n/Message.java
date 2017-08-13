@@ -29,7 +29,7 @@ import java.util.Arrays;
 /**
  * Represents a message that may be translatable or static.
  * <p><b>Note:</b> It is advised that all methods accepting message objects also provide an overload that
- * accepts translation key and arguments, where readability allows, to reduce clutter in code./p>
+ * accepts translation key and arguments, where readability allows, to reduce clutter in code.</p>
  *
  * @author <a href="https://l1t.li/">Literallie</a>
  * @since 2017-03-04

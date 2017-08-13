@@ -48,7 +48,7 @@ public class MinecraftLocale {
      * representations in Java, even though most language codes (as of 1.10) are compatible with the IETF language
      * tag format. To do the actual conversion, underscores are replaced with dashes.
      * <p>This method converts the following languages because of missing or incorrect Java representations:</p>
-     * <table>
+     * <table summary="Conversion table">
      * <thead><tr>
      * <th>Minecraft</th>
      * <th>Java / IETF</th>
