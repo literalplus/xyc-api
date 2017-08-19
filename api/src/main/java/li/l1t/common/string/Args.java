@@ -142,7 +142,9 @@ public class Args {
      */
     public double doubleArg(int index) {
         try {
-            return Double.parseDouble(arg(index));
+            String rawArg = arg(index);
+            String germanSafeArg = rawArg.replace(",", "."); // Germans use , as decimal separator
+            return Double.parseDouble(germanSafeArg);
         } catch (NumberFormatException e) {
             throw new ArgumentFormatException(arg(index), index, Message.of("x!api!decimal"), e);
         }
