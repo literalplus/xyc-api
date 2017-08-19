@@ -53,9 +53,45 @@ public class Args {
      * @param argsSeparated  the source string
      * @param separatorRegex the separator that separates the individual arguments in the string
      * @see String#split(String) for details on how the splitting is done
+     * @deprecated Clashes with {@link #Args(String...)} with two arguments - will be removed; Use {@link
+     * #fromSeparatedArgs(String, String)} instead.
      */
+    @Deprecated
     public Args(String argsSeparated, String separatorRegex) {
         this(argsSeparated.split(separatorRegex));
+    }
+
+    /**
+     * Creates a new Args object from a separated string of arguments. Creates an empty Args object if the source string
+     * is empty when {@link String#trim() trimmed}.
+     *
+     * @param argsSeparated  the source string
+     * @param separatorRegex the separator that separates the individual arguments in the string
+     * @return the created Args object
+     * @see String#split(String) for details on how the splitting is done
+     */
+    public static Args fromSeparatedArgs(String argsSeparated, String separatorRegex) {
+        Preconditions.checkNotNull(argsSeparated, "argsSeparated");
+        Preconditions.checkNotNull(separatorRegex, "separatorRegex");
+        if (argsSeparated.trim().isEmpty()) {
+            return new Args();
+        } else {
+            return new Args(argsSeparated.split(separatorRegex));
+        }
+    }
+
+    /**
+     * Creates a new Args object from a space-separated string of arguments. Creates an empty Args object if the source
+     * string, or the source string with the command name and slash removed is empty when {@link String#trim()
+     * trimmed}.
+     *
+     * @param commandLine the source string, with a slash (/) directly before the command name
+     * @return the created Args object
+     */
+    public static Args fromCommandLine(String commandLine) {
+        Preconditions.checkNotNull(commandLine, "commandLine");
+        commandLine = commandLine.replaceFirst("/\\w+ ?", "");
+        return fromSeparatedArgs(commandLine, " ");
     }
 
     public String[] args() {
@@ -70,6 +106,11 @@ public class Args {
         return Arrays.stream(args);
     }
 
+    /**
+     * @param index the zero-based index of the argument to retrieve
+     * @return the string argument at that index
+     * @throws MissingArgumentException if the index is out of range for this args object
+     */
     public String arg(int index) {
         if (!hasArg(index)) {
             throw MissingArgumentException.forIndex(index);
@@ -77,6 +118,13 @@ public class Args {
         return args[index];
     }
 
+    /**
+     * @param index the zero-based index of the argument to retrieve
+     * @return the integer argument at that index
+     * @throws MissingArgumentException if the index is out of range for this args object
+     * @throws ArgumentFormatException  if the argument at that index could not be converted to an integer using {@link
+     *                                  Integer#parseInt(String)}
+     */
     public int intArg(int index) {
         try {
             return Integer.parseInt(arg(index));
@@ -85,6 +133,13 @@ public class Args {
         }
     }
 
+    /**
+     * @param index the zero-based index of the argument to retrieve
+     * @return the double argument at that index
+     * @throws MissingArgumentException if the index is out of range for this args object
+     * @throws ArgumentFormatException  if the argument at that index could not be converted to a double using {@link
+     *                                  Double#parseDouble(String)}
+     */
     public double doubleArg(int index) {
         try {
             return Double.parseDouble(arg(index));
@@ -94,9 +149,8 @@ public class Args {
     }
 
     /**
-     * Attempts to match an enum argument on a best-effort basis. This converts the string to
-     * uppercase and replaces spaces and dashes with underscores, expecting the enum to follow
-     * standard Java naming conventions.
+     * Attempts to match an enum argument on a best-effort basis. This converts the string to uppercase and replaces
+     * spaces and dashes with underscores, expecting the enum to follow standard Java naming conventions.
      *
      * @param enumType the enum class to search in
      * @param index    the index of the argument to use
@@ -116,6 +170,13 @@ public class Args {
         }
     }
 
+    /**
+     * @param index the zero-based index of the argument to retrieve
+     * @return the UUID-like argument at that index
+     * @throws MissingArgumentException if the index is out of range for this args object
+     * @throws ArgumentFormatException  if the argument at that index could not be converted to an UUID using {@link
+     *                                  UUID#fromString(String)}
+     */
     public UUID uuidArg(int index) {
         try {
             return UUID.fromString(arg(index));
@@ -124,14 +185,26 @@ public class Args {
         }
     }
 
+    /**
+     * @param index the zero-based index of the argument to find
+     * @return an optional containing the string argument at given index, or an empty optional if given index is out of
+     * range for this args object
+     */
     public Optional<String> findArg(int index) {
         return hasArg(index) ? Optional.of(arg(index)) : Optional.empty();
     }
 
+    /**
+     * @param index the zero-based index of the argument to inspect
+     * @return whether this args object has an argument at given index
+     */
     public boolean hasArg(int index) {
         return args.length > index;
     }
 
+    /**
+     * @return whether this args object does not have any arguments
+     */
     public boolean hasNoArgs() {
         return args.length == 0;
     }
