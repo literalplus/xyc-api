@@ -32,6 +32,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 /**
@@ -42,6 +44,8 @@ import java.util.stream.Stream;
  */
 public class Args {
     private final String[] args;
+    // TODO: This does not belong in this class v
+    private final Pattern HEXADECIMAL_PATTERN = Pattern.compile("^0x", Pattern.CASE_INSENSITIVE);
 
     public Args(String... args) {
         this.args = Preconditions.checkNotNull(args, "args");
@@ -126,10 +130,16 @@ public class Args {
      *                                  Integer#parseInt(String)}
      */
     public int intArg(int index) {
+        String argStr = arg(index);
         try {
-            return Integer.parseInt(arg(index));
+            Matcher hexMatcher = HEXADECIMAL_PATTERN.matcher(argStr);
+            if (hexMatcher.find()) {
+                return Integer.parseInt(hexMatcher.replaceFirst(""), 16);
+            } else {
+                return Integer.parseInt(argStr, 10);
+            }
         } catch (NumberFormatException e) {
-            throw new ArgumentFormatException(arg(index), index, Message.of("x!api!number"), e);
+            throw new ArgumentFormatException(argStr, index, Message.of("x!api!number"), e);
         }
     }
 
@@ -201,7 +211,7 @@ public class Args {
      * @return whether this args object has an argument at given index
      */
     public boolean hasArg(int index) {
-        return args.length > index;
+        return index >= 0 && args.length > index;
     }
 
     /**
@@ -234,4 +244,25 @@ public class Args {
         return new Args(Arrays.copyOfRange(args, startIndexInclusive, args.length));
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (!(other instanceof Args)) {
+            return false;
+        }
+        Args otherArgs = (Args) other;
+        return Arrays.equals(args, otherArgs.args);
+    }
+
+    @Override
+    public int hashCode() {
+        return Arrays.hashCode(args);
+    }
+
+    @Override
+    public String toString() {
+        return "Args" + Arrays.toString(args);
+    }
 }
