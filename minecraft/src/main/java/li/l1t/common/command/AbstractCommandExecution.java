@@ -78,7 +78,7 @@ public abstract class AbstractCommandExecution extends Args implements CommandEx
         respond(
                 new XyComponentBuilder(commandLine, ChatColor.YELLOW)
                         .suggest(commandLine)
-                        .tooltip(XycI18n.getMessage(locale(), "x!mc!click-to-copy"))
+                        .tooltip(XycI18n.getMessage(locale(), "x!mc!click-to-copy", commandLine))
                         .appendIf(!arguments.isEmpty(), " " + arguments)
                         .append(" ", ComponentBuilder.FormatRetention.NONE)
                         .append(description, ChatColor.GOLD)
