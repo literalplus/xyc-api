@@ -26,7 +26,9 @@ package li.l1t.common.i18n;
 
 import org.junit.jupiter.api.Test;
 
-import static com.google.common.truth.Truth.assertThat;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.startsWith;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
  * @author <a href="https://l1t.li/">Literallie</a>
@@ -41,10 +43,10 @@ class MessagePathTest {
     private void whenParsedThenFieldsAreOk(String shorthandKey, String packageKey, String bundleName, String key) {
         String fullPath = shorthandKey + "!" + bundleName + "!" + key;
         MessagePath path = MessagePath.of(fullPath);
-        assertThat(path.packageKey()).isEqualTo(packageKey);
-        assertThat(path.bundle()).isEqualTo(packageKey + "." + bundleName);
-        assertThat(path.key()).isEqualTo(key);
-        assertThat(path.bundle()).startsWith(path.packageKey());
+        assertThat(path.packageKey(), is(packageKey));
+        assertThat(path.bundle(), is(packageKey + "." + bundleName));
+        assertThat(path.key(), is(key));
+        assertThat(path.bundle(), startsWith(path.packageKey()));
     }
 
     @Test
@@ -54,13 +56,14 @@ class MessagePathTest {
 
     @Test
     void of__xycPackage() {
-        whenParsedThenFieldsAreOk("", "li.l1t.common", "somebundle", "my.key");
+        whenParsedThenFieldsAreOk("x", "li.l1t.common", "somebundle", "my.key");
     }
 
     @Test
     void of__customShorthand() {
         String customShorthand = "cust";
         String customPackageName = "li.l1t.some.custom.package";
+        MessagePath.registerPackageShorthand(customShorthand, customPackageName);
         whenParsedThenFieldsAreOk(customShorthand, customPackageName, "custom-bundle", "my.custom.msg");
     }
 }

@@ -66,11 +66,13 @@ public class MessagePath {
 
     public static MessagePath of(String path) {
         String[] parts = path.split("!");
-        if (parts.length != 3 || parts[2].isEmpty() || parts[1].isEmpty()) {
+        String bundleName = parts[1];
+        String key = parts[2];
+        if (parts.length != 3 || key.isEmpty() || bundleName.isEmpty()) {
             throw new IllegalArgumentException(String.format("Malformed message path: '%s'", path));
         }
         String packageName = packageShorthands.getOrDefault(parts[0], parts[0]);
-        return new MessagePath(parts[0], packageName + "." + parts[0], parts[1]);
+        return new MessagePath(packageName, packageName + "." + bundleName, key);
     }
 
     public String packageKey() {
@@ -78,8 +80,8 @@ public class MessagePath {
     }
 
     /**
-     * @return the fully qualified name of the bundle the message is located in, including the package key, followed by a
-     * dot, and then the actual name of the bundle
+     * @return the fully qualified name of the bundle the message is located in, including the package key, followed by
+     * a dot, and then the actual name of the bundle
      */
     public String bundle() {
         return bundle;
