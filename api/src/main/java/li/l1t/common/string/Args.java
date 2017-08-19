@@ -47,6 +47,11 @@ public class Args {
     // TODO: This does not belong in this class v
     private final Pattern HEXADECIMAL_PATTERN = Pattern.compile("^0x", Pattern.CASE_INSENSITIVE);
 
+    /**
+     * @param args the string arguments to wrap
+     * @deprecated Clashes with {@link #Args(String, String)} - Use {@link #of(String...)} instead.
+     */
+    @Deprecated
     public Args(String... args) {
         this.args = Preconditions.checkNotNull(args, "args");
     }
@@ -66,6 +71,18 @@ public class Args {
     }
 
     /**
+     * Creates a new Args object wrapping given arguments. This method always considers given arguments as an array,
+     * unlike {@link #Args(String...)}, which clashes with {@link #Args(String, String)} for two arguments.
+     *
+     * @param args the string arguments to wrap
+     * @return the created Args object
+     */
+    @SuppressWarnings("deprecation")
+    public static Args of(String... args) {
+        return new Args(args);
+    }
+
+    /**
      * Creates a new Args object from a separated string of arguments. Creates an empty Args object if the source string
      * is empty when {@link String#trim() trimmed}.
      *
@@ -74,6 +91,7 @@ public class Args {
      * @return the created Args object
      * @see String#split(String) for details on how the splitting is done
      */
+    @SuppressWarnings("deprecation")
     public static Args fromSeparatedArgs(String argsSeparated, String separatorRegex) {
         Preconditions.checkNotNull(argsSeparated, "argsSeparated");
         Preconditions.checkNotNull(separatorRegex, "separatorRegex");
