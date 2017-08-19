@@ -28,7 +28,7 @@
     <parent>
         <artifactId>xyc-api-parent</artifactId>
         <groupId>li.l1t.common</groupId>
-        <version>4.5.2-SNAPSHOT</version>
+        <version>4.5.2</version>
     </parent>
 
     <artifactId>xyc-api-spigot</artifactId>
