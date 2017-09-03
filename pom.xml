@@ -47,6 +47,13 @@
     </description>
     <inceptionYear>2013</inceptionYear>
 
+    <licenses>
+        <license>
+            <name>The MIT License</name>
+            <url>https://choosealicense.com/licenses/mit/</url>
+        </license>
+    </licenses>
+
     <scm>
         <connection>scm:git:git@github.com:xxyy/xyc-api.git</connection>
         <developerConnection>scm:git:git@github.com:xxyy/xyc-api.git</developerConnection>
