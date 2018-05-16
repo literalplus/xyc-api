@@ -1,6 +1,8 @@
 XYC-API [![Build Status](https://ci.l1t.li/buildStatus/icon?job=public~xyc-api)](https://ci.l1t.li/job/public~xyc-api)
 ========
 
+While this project does already provide some shiny concreteness (look for the CommandExecution API), the implementation [XYC](https://github.com/xxyy/xyc) provides much more implementation. 
+
 About
 ------
 
