@@ -1,7 +1,7 @@
-XYC-API [![Build Status](https://ci.l1t.li/buildStatus/icon?job=public~xyc-api)](https://ci.l1t.li/job/public~xyc-api)
+XYC-API [![Build Status](https://ci.lit.plus/buildStatus/icon?job=public~xyc-api)](https://ci.lit.plus/job/public~xyc-api)
 ========
 
-While this project does already provide some shiny concreteness (look for the CommandExecution API), the implementation [XYC](https://github.com/xxyy/xyc) provides much more implementation. 
+While this project does already provide some shiny concreteness (look for the CommandExecution API), the implementation [XYC](https://github.com/literalplus/xyc) provides much more implementation. 
 
 About
 ------
@@ -33,7 +33,7 @@ repository declaration in your pom file:
 ````xml
 <repository>
   <id>xxyy-repo</id>
-  <url>https://repo.l1t.li/xxyy-public/</url>
+  <url>https://repo.lit.plus/xxyy-public/</url>
 </repository>
 ````
 
@@ -47,7 +47,7 @@ To add a dependency on this project, add the following to the `<dependencies>` s
 </dependency>
 ````
 
-You can look up the latest release version [at my build server](https://ci.l1t.li/job/public~xyc-api).
+You can look up the latest release version [at my build server](https://ci.lit.plus/job/public~xyc-api).
 
 Versioning
 ----------
@@ -85,7 +85,7 @@ This project is licensed under the MIT license:
 ````
 MIT License
 
-Copyright (c) 2016-2017 Philipp Nowak (Literallie)
+Copyright (c) 2016-2019 Philipp Nowak (git@lit.plus)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
